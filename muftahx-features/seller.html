@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Seller Dashboard — MuftahX</title>
+<style>
+:root {
+  --g: #1b4332; --gold: #c9952a; --navy: #0f2044;
+  --bg: #0a1020; --surface: rgba(255,255,255,.05);
+  --border: rgba(255,255,255,.09); --text: rgba(255,255,255,.85);
+  --muted: rgba(255,255,255,.4); --mono: 'Courier New', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);min-height:100vh}
+nav{background:var(--navy);border-bottom:1px solid rgba(201,149,42,.18);height:60px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-family:Georgia,serif;font-size:20px;font-weight:700;color:#fff;text-decoration:none}
+.logo span{color:var(--gold)}
+.logo small{font-family:var(--mono);font-size:9px;color:var(--muted);margin-left:10px;letter-spacing:.1em}
+.nav-tabs{display:flex;gap:6px}
+.nav-tab{padding:7px 16px;font-size:11px;border:none;border-radius:6px;cursor:pointer;background:transparent;color:var(--muted);font-family:var(--mono);letter-spacing:.04em;transition:all .15s}
+.nav-tab.active{background:rgba(201,149,42,.15);color:var(--gold)}
+.nav-back{padding:7px 16px;font-size:11px;color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:6px}
+main{max-width:1200px;margin:0 auto;padding:2rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.stat-val{font-size:34px;font-weight:500;line-height:1;margin-bottom:6px}
+.stat-label{font-size:11px;color:var(--muted)}
+.listings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.listing-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;transition:border-color .15s}
+.listing-card:hover{border-color:rgba(201,149,42,.25)}
+.listing-title{font-size:13px;font-weight:600;line-height:1.4;flex:1}
+.badge{padding:3px 10px;border-radius:12px;font-size:9px;font-weight:700;flex-shrink:0}
+.badge-active{background:rgba(116,198,157,.12);color:#74c69d;border:1px solid rgba(116,198,157,.25)}
+.badge-pending{background:rgba(201,149,42,.12);color:var(--gold);border:1px solid rgba(201,149,42,.25)}
+.badge-seller{background:rgba(116,198,157,.12);color:#74c69d;border:1px solid rgba(116,198,157,.25)}
+.badge-buyer{background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid rgba(96,165,250,.25)}
+.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.meta-cell{background:rgba(255,255,255,.04);border-radius:6px;padding:8px 10px}
+.meta-key{font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.meta-val{font-size:11px;color:var(--text)}
+.desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.card-footer{display:flex;justify-content:space-between;align-items:center}
+.inquiries-count{font-size:11px;color:var(--gold)}
+.btn{padding:7px 16px;border-radius:6px;font-size:11px;cursor:pointer;font-family:var(--mono);border:none;transition:all .15s}
+.btn-gold{background:var(--gold);color:var(--g);font-weight:700}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.form-card{max-width:700px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem}
+.form-title{font-size:16px;font-weight:600;margin-bottom:20px}
+.field{margin-bottom:16px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+label{display:block;font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+input,select,textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:12px;padding:10px 12px;border-radius:7px;outline:none;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:rgba(201,149,42,.4)}
+select option{background:#1a2a4a}
+textarea{resize:vertical;min-height:100px}
+.months-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.month-btn{padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:var(--mono);transition:all .15s;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--muted)}
+.month-btn.selected{background:rgba(201,149,42,.2);border-color:var(--gold);color:var(--gold)}
+.submit-btn{width:100%;padding:14px;background:var(--gold);color:var(--g);font-family:var(--mono);font-size:13px;font-weight:700;border:none;border-radius:8px;cursor:pointer;margin-top:4px;transition:opacity .15s}
+.submit-btn:hover{opacity:.9}
+.submit-hint{font-size:10px;color:var(--muted);text-align:center;margin-top:10px}
+.inquiry-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:12px}
+.inquiry-msg{font-size:12px;color:var(--text);line-height:1.6;background:rgba(255,255,255,.04);border-radius:6px;padding:10px 12px;margin-bottom:12px;font-style:italic}
+.inq-actions{display:flex;gap:8px}
+.toast{position:fixed;top:16px;right:16px;z-index:9999;background:var(--g);border:1px solid #40916c;color:#fff;padding:10px 20px;border-radius:8px;font-size:12px;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.tab-content{display:none}
+.tab-content.active{display:block}
+@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}.field-row{grid-template-columns:1fr}.nav-tabs{display:none}}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<nav>
+  <a class="logo" href="/index.html">Muftah<span>X</span><small>SELLER DASHBOARD</small></a>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('listings')">My Listings</button>
+    <button class="nav-tab" onclick="showTab('new')">+ New Listing</button>
+    <button class="nav-tab" onclick="showTab('inquiries')">Inquiries</button>
+  </div>
+  <a class="nav-back" href="/index.html">← Marketplace</a>
+</nav>
+
+<main>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card"><div class="stat-val" style="color:var(--gold)" id="stat-active">2</div><div class="stat-label">Active listings</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:#74c69d" id="stat-inquiries">11</div><div class="stat-label">Total inquiries</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:#60a5fa" id="stat-pending">1</div><div class="stat-label">Pending approval</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:#a78bfa">142</div><div class="stat-label">Profile views</div></div>
+  </div>
+
+  <!-- MY LISTINGS -->
+  <div class="tab-content active" id="tab-listings">
+    <div class="listings-grid" id="listings-grid"></div>
+  </div>
+
+  <!-- NEW LISTING -->
+  <div class="tab-content" id="tab-new">
+    <div class="form-card">
+      <div class="form-title">Post a new export listing</div>
+
+      <div class="field">
+        <label>Listing title *</label>
+        <input id="f-title" placeholder="e.g. Premium Red Roses Grade AA" />
+      </div>
+
+      <div class="field-row">
+        <div>
+          <label>Price per unit *</label>
+          <input id="f-price" placeholder="e.g. $0.28/stem or $4.20/kg" />
+        </div>
+        <div>
+          <label>Minimum order quantity *</label>
+          <input id="f-moq" placeholder="e.g. 50,000 stems/week" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Origin county *</label>
+        <input id="f-origin" placeholder="e.g. Naivasha, Nakuru County" />
+      </div>
+
+      <div class="field-row">
+        <div>
+          <label>Category</label>
+          <select id="f-category">
+            <option>Cut Flowers</option><option>Coffee</option><option>Tea</option>
+            <option>Avocado &amp; Fruits</option><option>Vegetables</option>
+            <option>Macadamia</option><option>Spices &amp; Herbs</option>
+            <option>Apparel</option><option>Leather Goods</option><option>Essential Oils</option>
+          </select>
+        </div>
+        <div>
+          <label>Certifications held</label>
+          <select id="f-certs">
+            <option>KEPHIS only</option>
+            <option>KEPHIS + GlobalGAP</option>
+            <option>KEPHIS + GlobalGAP + FDA</option>
+            <option>KEPHIS + AFA/HCD</option>
+            <option>Organic certified</option>
+            <option>Still getting certified</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Shipping terms</label>
+        <select id="f-shipping">
+          <option>FOB Mombasa</option>
+          <option>FOB Nairobi Airport</option>
+          <option>CIF destination</option>
+          <option>EXW farm</option>
+          <option>CFR destination</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Available months</label>
+        <div class="months-grid" id="months-grid"></div>
+      </div>
+
+      <div class="field">
+        <label>Product description</label>
+        <textarea id="f-desc" placeholder="Describe your product — quality, packaging, storage, certifications, lead time, any special qualities buyers should know..."></textarea>
+      </div>
+
+      <button class="submit-btn" onclick="submitListing()">Submit Listing for Review →</button>
+      <div class="submit-hint">Listings are reviewed within 24 hours. You will be notified by email.</div>
+    </div>
+  </div>
+
+  <!-- INQUIRIES -->
+  <div class="tab-content" id="tab-inquiries">
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Buyers who have contacted you about your listings</div>
+    <div id="inquiries-list"></div>
+  </div>
+</main>
+
+<script>
+var listings = [
+  { id:'1', title:'Premium Red Roses — Grade AA', category:'Cut Flowers', price:'$0.28/stem', moq:'50,000 stems/week', origin:'Naivasha, Nakuru County', certs:'KEPHIS + GlobalGAP', desc:'Fresh cut roses, 60cm stems, 28-day vase life. Available year-round with peak supply Feb–Apr.', shipping:'FOB Nairobi Airport', status:'active', inquiries:7 },
+  { id:'2', title:'Arabica Coffee — Washed AA', category:'Coffee', price:'$4.20/kg', moq:'1 MT per shipment', origin:'Nyeri, Central Kenya', certs:'KEPHIS + GlobalGAP + FDA', desc:'Single origin washed Arabica. Score 88+. Direct from cooperative with full traceability.', shipping:'FOB Mombasa', status:'active', inquiries:3 },
+  { id:'3', title:'Hass Avocado — Export Grade A', category:'Avocado & Fruits', price:'$0.45/kg', moq:'5 MT per container', origin:"Murang'a County", certs:'KEPHIS + GlobalGAP', desc:'Fresh Hass avocado, 180–300g fruit. Packaged in 4kg cartons. Cold chain maintained.', shipping:'CIF destination', status:'pending', inquiries:1 },
+];
+
+var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var selMonths = [];
+
+var INQUIRIES = [
+  { buyer:'Dutch Flowers Import BV', country:'Netherlands', listing:'Premium Red Roses', qty:'100,000 stems/week', msg:'We are interested in a long-term supply agreement. Can you provide a sample shipment first?', date:'Apr 20, 2025', status:'new' },
+  { buyer:'Gulf Fresh Trading LLC', country:'UAE', listing:'Arabica Coffee AA', qty:'5 MT/month', msg:'Please send us your export documentation and price list for Q3 2025.', date:'Apr 18, 2025', status:'replied' },
+  { buyer:'Avocado Europe GmbH', country:'Germany', listing:'Hass Avocado Grade A', qty:'10 MT per week', msg:'We need GlobalGAP cert and cold chain guarantee. What is your lead time from farm to port?', date:'Apr 15, 2025', status:'new' },
+];
+
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  var tabs = document.querySelectorAll('.nav-tab');
+  var map = { listings:0, new:1, inquiries:2 };
+  tabs[map[name]].classList.add('active');
+}
+
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, 3000);
+}
+
+function renderListings() {
+  var grid = document.getElementById('listings-grid');
+  grid.innerHTML = listings.map(function(l) {
+    return '<div class="listing-card">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">' +
+        '<div class="listing-title">' + l.title + '</div>' +
+        '<span class="badge badge-' + l.status + '" style="margin-left:8px">' + l.status.toUpperCase() + '</span>' +
+      '</div>' +
+      '<div style="font-size:11px;color:var(--muted);margin-bottom:10px">' + l.category + ' · ' + l.origin + '</div>' +
+      '<div class="meta-grid">' +
+        '<div class="meta-cell"><div class="meta-key">Price</div><div class="meta-val">' + l.price + '</div></div>' +
+        '<div class="meta-cell"><div class="meta-key">MOQ</div><div class="meta-val">' + l.moq + '</div></div>' +
+        '<div class="meta-cell"><div class="meta-key">Certs</div><div class="meta-val">' + l.certs + '</div></div>' +
+        '<div class="meta-cell"><div class="meta-key">Shipping</div><div class="meta-val">' + l.shipping + '</div></div>' +
+      '</div>' +
+      '<div class="desc">' + l.desc.substring(0,110) + '...</div>' +
+      '<div class="card-footer">' +
+        '<span class="inquiries-count">' + l.inquiries + ' inquiries received</span>' +
+        '<button class="btn btn-ghost" onclick="showTab(\'inquiries\')">View inquiries →</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function renderMonths() {
+  var grid = document.getElementById('months-grid');
+  grid.innerHTML = MONTHS.map(function(m) {
+    return '<button class="month-btn" onclick="toggleMonth(this,\'' + m + '\')">' + m + '</button>';
+  }).join('');
+}
+
+function toggleMonth(el, m) {
+  var idx = selMonths.indexOf(m);
+  if (idx >= 0) { selMonths.splice(idx,1); el.classList.remove('selected'); }
+  else { selMonths.push(m); el.classList.add('selected'); }
+}
+
+function submitListing() {
+  var title = document.getElementById('f-title').value.trim();
+  var price = document.getElementById('f-price').value.trim();
+  var moq   = document.getElementById('f-moq').value.trim();
+  var origin= document.getElementById('f-origin').value.trim();
+  if (!title || !price || !moq || !origin) { toast('⚠ Please fill in all required fields'); return; }
+
+  listings.unshift({
+    id: Date.now().toString(),
+    title: title,
+    category: document.getElementById('f-category').value,
+    price: price, moq: moq, origin: origin,
+    certs: document.getElementById('f-certs').value,
+    desc: document.getElementById('f-desc').value || 'No description provided.',
+    shipping: document.getElementById('f-shipping').value,
+    status: 'pending', inquiries: 0,
+  });
+
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-price').value = '';
+  document.getElementById('f-moq').value = '';
+  document.getElementById('f-origin').value = '';
+  document.getElementById('f-desc').value = '';
+  selMonths = [];
+  renderMonths();
+  document.getElementById('stat-pending').textContent = listings.filter(function(l){ return l.status==='pending'; }).length;
+  renderListings();
+  showTab('listings');
+  toast('✓ Listing submitted for admin review. You will be notified within 24 hours.');
+}
+
+function renderInquiries() {
+  document.getElementById('inquiries-list').innerHTML = INQUIRIES.map(function(inq) {
+    return '<div class="inquiry-card">' +
+      '<div style="display:flex;justify-content:space-between;margin-bottom:10px">' +
+        '<div>' +
+          '<div style="font-size:13px;font-weight:600">' + inq.buyer + '</div>' +
+          '<div style="font-size:11px;color:var(--muted)">' + inq.country + ' · ' + inq.date + '</div>' +
+        '</div>' +
+        '<span class="badge badge-' + (inq.status==='new'?'pending':'active') + '">' + inq.status.toUpperCase() + '</span>' +
+      '</div>' +
+      '<div style="font-size:11px;color:var(--muted);margin-bottom:8px">Re: <span style="color:var(--gold)">' + inq.listing + '</span> · Qty: ' + inq.qty + '</div>' +
+      '<div class="inquiry-msg">"' + inq.msg + '"</div>' +
+      '<div class="inq-actions">' +
+        '<a href="/negotiate" class="btn btn-gold" style="text-decoration:none;display:inline-block">Open Negotiation Room →</a>' +
+        '<button class="btn btn-ghost" onclick="this.textContent=\'✓ Marked\';this.disabled=true">Mark as replied</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+renderListings();
+renderMonths();
+renderInquiries();
+</script>
+</body>
+</html>

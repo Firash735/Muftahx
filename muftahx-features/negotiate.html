@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Negotiation Room — MuftahX</title>
+<style>
+:root{--g:#1b4332;--gold:#c9952a;--navy:#0f2044;--bg:#0a1020;--surface:rgba(255,255,255,.05);--border:rgba(255,255,255,.09);--text:rgba(255,255,255,.85);--muted:rgba(255,255,255,.4);--mono:'Courier New',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+nav{background:var(--navy);border-bottom:1px solid rgba(201,149,42,.18);height:60px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.logo{font-family:Georgia,serif;font-size:18px;font-weight:700;color:#fff;text-decoration:none}
+.logo span{color:var(--gold)}
+.nav-meta{font-size:10px;color:var(--muted);margin-top:3px}
+.nav-right{display:flex;gap:8px;align-items:center}
+.role-btn{padding:5px 12px;font-size:10px;border:1px solid var(--border);border-radius:5px;cursor:pointer;background:transparent;color:var(--muted);font-family:var(--mono);transition:all .15s}
+.role-btn.active{background:rgba(201,149,42,.15);color:var(--gold);border-color:rgba(201,149,42,.3)}
+.status-badge{padding:4px 10px;border-radius:5px;font-size:9px;font-weight:700;background:rgba(201,149,42,.14);color:var(--gold);border:1px solid rgba(201,149,42,.25)}
+.status-badge.accepted{background:rgba(116,198,157,.14);color:#74c69d;border-color:rgba(116,198,157,.25)}
+.nav-back{padding:5px 12px;font-size:10px;color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:5px}
+.deal-bar{background:rgba(255,255,255,.04);border-bottom:1px solid var(--border);padding:.75rem 2rem;display:flex;gap:24px;flex-shrink:0;overflow-x:auto}
+.deal-field{flex-shrink:0}
+.deal-key{font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.deal-val{font-size:11px;color:var(--text);margin-top:2px}
+.messages{flex:1;overflow-y:auto;padding:1.5rem 2rem;display:flex;flex-direction:column;gap:12px}
+.msg-wrap-center{display:flex;justify-content:center}
+.msg-wrap-right{display:flex;flex-direction:column;align-items:flex-end}
+.msg-wrap-left{display:flex;flex-direction:column;align-items:flex-start}
+.system-msg{font-size:10px;color:var(--muted);background:rgba(255,255,255,.04);padding:6px 16px;border-radius:20px;border:1px solid var(--border)}
+.msg-name{font-size:9px;color:var(--muted);margin-bottom:4px}
+.msg-name-right{text-align:right}
+.bubble{max-width:72%;border-radius:10px;padding:10px 14px;font-size:12px;line-height:1.6}
+.bubble-mine{background:rgba(201,149,42,.1);border:1px solid rgba(201,149,42,.18)}
+.bubble-theirs{background:rgba(255,255,255,.07);border:1px solid var(--border)}
+.offer-card{max-width:72%;background:rgba(201,149,42,.06);border:1px solid rgba(201,149,42,.2);border-radius:10px;padding:1rem;margin-bottom:0}
+.offer-card.accepted{background:rgba(116,198,157,.06);border-color:rgba(116,198,157,.2)}
+.offer-label{font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:10px;color:var(--gold)}
+.offer-label.accepted{color:#74c69d}
+.offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.offer-field .ok{font-size:8px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.offer-field .ov{font-size:11px;color:var(--text)}
+.input-area{border-top:1px solid var(--border);padding:1.25rem 2rem;flex-shrink:0;background:rgba(0,0,0,.3)}
+.mode-row{display:flex;gap:8px;margin-bottom:12px;align-items:center}
+.mode-btn{padding:5px 14px;font-size:10px;border-radius:5px;cursor:pointer;font-family:var(--mono);transition:all .15s;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--muted)}
+.mode-btn.active{background:var(--gold);color:var(--g);border-color:var(--gold)}
+.accept-btn{margin-left:auto;padding:5px 16px;font-size:10px;font-weight:700;border-radius:5px;cursor:pointer;font-family:var(--mono);background:rgba(116,198,157,.14);border:1px solid rgba(116,198,157,.25);color:#74c69d;transition:all .15s}
+.accept-btn:hover{background:rgba(116,198,157,.25)}
+.msg-row{display:flex;gap:10px}
+.msg-input{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:12px;padding:10px 14px;border-radius:8px;outline:none;transition:border-color .15s}
+.msg-input:focus{border-color:rgba(201,149,42,.4)}
+.send-btn{padding:10px 20px;background:var(--gold);color:var(--g);border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--mono);transition:opacity .15s}
+.send-btn:hover{opacity:.9}
+.offer-form{background:rgba(255,255,255,.04);border:1px solid rgba(201,149,42,.15);border-radius:10px;padding:1rem}
+.offer-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.offer-form-field .fk{font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+input,select{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:11px;padding:8px 10px;border-radius:6px;outline:none;transition:border-color .15s}
+input:focus,select:focus{border-color:rgba(201,149,42,.4)}
+select option{background:#1a2a4a}
+.offer-submit{width:100%;padding:10px;background:var(--gold);color:var(--g);border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--mono);transition:opacity .15s}
+.offer-submit:hover{opacity:.9}
+.deal-done{border-top:1px solid rgba(116,198,157,.2);padding:1.25rem 2rem;background:rgba(116,198,157,.04);text-align:center;flex-shrink:0}
+.deal-done-title{font-size:13px;color:#74c69d;margin-bottom:4px}
+.deal-done-sub{font-size:11px;color:var(--muted)}
+.toast{position:fixed;top:16px;right:16px;z-index:9999;background:var(--g);border:1px solid #40916c;color:#fff;padding:10px 20px;border-radius:8px;font-size:12px;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<nav>
+  <div>
+    <a class="logo" href="/index.html">Muftah<span>X</span><span style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-left:10px;letter-spacing:.1em">NEGOTIATION ROOM</span></a>
+    <div class="nav-meta" id="deal-title">Premium Red Roses — Grade AA · Deal #MX-2025-0042</div>
+  </div>
+  <div class="nav-right">
+    <span style="font-size:10px;color:var(--muted)">Viewing as:</span>
+    <button class="role-btn active" id="role-buyer" onclick="setRole('buyer')">🌍 Buyer</button>
+    <button class="role-btn" id="role-seller" onclick="setRole('seller')">🌿 Seller</button>
+    <span class="status-badge" id="status-badge">NEGOTIATING</span>
+    <a class="nav-back" href="/index.html">← Back</a>
+  </div>
+</nav>
+
+<div class="deal-bar">
+  <div class="deal-field"><div class="deal-key">Seller</div><div class="deal-val">Naivasha Rose Growers Ltd ✓</div></div>
+  <div class="deal-field"><div class="deal-key">Buyer</div><div class="deal-val">Dutch Flowers Import BV</div></div>
+  <div class="deal-field"><div class="deal-key">Product</div><div class="deal-val">Red Roses Grade AA</div></div>
+  <div class="deal-field"><div class="deal-key">Volume</div><div class="deal-val">2,000,000 stems/month</div></div>
+  <div class="deal-field"><div class="deal-key">Started</div><div class="deal-val">Apr 20, 2025</div></div>
+  <div class="deal-field"><div class="deal-key">Messages</div><div class="deal-val" id="msg-count">5</div></div>
+</div>
+
+<div class="messages" id="messages"></div>
+
+<div id="input-area">
+  <div class="input-area">
+    <div class="mode-row">
+      <button class="mode-btn active" id="mode-message" onclick="setMode('message')">💬 Message</button>
+      <button class="mode-btn" id="mode-offer" onclick="setMode('offer')">💼 Make Offer</button>
+      <button class="accept-btn" id="accept-btn" onclick="acceptDeal()">✓ Accept Last Offer</button>
+    </div>
+    <div id="message-input">
+      <div class="msg-row">
+        <input class="msg-input" id="msg-text" placeholder="Type your message… (Enter to send)" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}" />
+        <button class="send-btn" onclick="sendMsg()">Send</button>
+      </div>
+    </div>
+    <div id="offer-input" style="display:none">
+      <div class="offer-form">
+        <div class="offer-form-grid">
+          <div class="offer-form-field"><div class="fk">Your price offer *</div><input id="o-price" placeholder="e.g. $0.25/stem" /></div>
+          <div class="offer-form-field"><div class="fk">Quantity *</div><input id="o-qty" placeholder="e.g. 2,000,000 stems/month" /></div>
+          <div class="offer-form-field"><div class="fk">Delivery terms</div><input id="o-delivery" value="FOB Nairobi Airport" /></div>
+          <div class="offer-form-field"><div class="fk">Payment terms</div>
+            <select id="o-payment">
+              <option>30% advance, 70% on BL</option>
+              <option>50% advance, 50% on BL</option>
+              <option>100% advance</option>
+              <option>Letter of Credit (LC)</option>
+              <option>Documents against Payment (DAP)</option>
+            </select>
+          </div>
+        </div>
+        <button class="offer-submit" onclick="sendOffer()" id="offer-submit-btn">Submit Offer →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="deal-done-area" style="display:none">
+  <div class="deal-done">
+    <div class="deal-done-title">✓ Deal accepted — Pro Forma Invoice will be sent to both parties within 24 hours</div>
+    <div class="deal-done-sub">Next step: Buyer sends advance payment · Seller begins packaging · MuftahX sends invoice template</div>
+  </div>
+</div>
+
+<script>
+var role = 'buyer';
+var mode = 'message';
+var dealDone = false;
+
+var NAMES = { buyer:'Dutch Flowers Import BV', seller:'Naivasha Rose Growers Ltd', system:'MuftahX' };
+
+var messages = [
+  { sender:'system', text:'Negotiation room opened. All messages are private between buyer and seller.', type:'message' },
+  { sender:'buyer', text:'Hello, we are very interested in your red roses. We import approximately 2 million stems per month for the Dutch wholesale market. Can you handle this volume?', type:'message' },
+  { sender:'seller', text:'Good morning! Yes, we can comfortably supply 2M stems/month. We have 15 hectares with year-round capacity. We would need to discuss pricing for this volume.', type:'message' },
+  { sender:'buyer', text:'', type:'offer', offer:{ price:'$0.22/stem', qty:'2,000,000 stems/month', delivery:'FOB Nairobi Airport', payment:'30% advance, 70% on BL' } },
+  { sender:'seller', text:'Thank you. At that volume we can work with you but the price needs to reflect our Grade AA quality. Our counter proposal:', type:'counter', offer:{ price:'$0.26/stem', qty:'2,000,000 stems/month', delivery:'FOB Nairobi Airport', payment:'50% advance, 50% on BL' } },
+];
+
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function(){ el.classList.remove('show'); }, 3500);
+}
+
+function setRole(r) {
+  role = r;
+  document.getElementById('role-buyer').classList.toggle('active', r==='buyer');
+  document.getElementById('role-seller').classList.toggle('active', r==='seller');
+  document.getElementById('offer-submit-btn').textContent = 'Submit ' + (r==='buyer'?'Offer':'Counter-Offer') + ' →';
+  renderMessages();
+}
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('mode-message').classList.toggle('active', m==='message');
+  document.getElementById('mode-offer').classList.toggle('active', m==='offer');
+  document.getElementById('message-input').style.display = m==='message'?'block':'none';
+  document.getElementById('offer-input').style.display = m==='offer'?'block':'none';
+}
+
+function now() {
+  return new Date().toLocaleString('en-KE',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+function sendMsg() {
+  var text = document.getElementById('msg-text').value.trim();
+  if (!text) return;
+  messages.push({ sender:role, text:text, type:'message' });
+  document.getElementById('msg-text').value = '';
+  renderMessages();
+  updateCount();
+}
+
+function sendOffer() {
+  var price = document.getElementById('o-price').value.trim();
+  var qty   = document.getElementById('o-qty').value.trim();
+  if (!price || !qty) { toast('⚠ Fill in price and quantity'); return; }
+  messages.push({
+    sender: role,
+    text: '',
+    type: role==='buyer'?'offer':'counter',
+    offer: {
+      price: price, qty: qty,
+      delivery: document.getElementById('o-delivery').value,
+      payment:  document.getElementById('o-payment').value,
+    }
+  });
+  document.getElementById('o-price').value = '';
+  document.getElementById('o-qty').value = '';
+  setMode('message');
+  renderMessages();
+  updateCount();
+}
+
+function acceptDeal() {
+  var lastOffer = null;
+  for (var i=messages.length-1;i>=0;i--) {
+    if (messages[i].type==='offer'||messages[i].type==='counter') { lastOffer=messages[i]; break; }
+  }
+  messages.push({ sender:role, text:'', type:'accept', offer:lastOffer?lastOffer.offer:null });
+  messages.push({ sender:'system', text:'🎉 Deal accepted! Both parties have agreed. MuftahX will send a Pro Forma Invoice template to both emails within 24 hours.', type:'message' });
+  dealDone = true;
+  document.getElementById('input-area').style.display = 'none';
+  document.getElementById('deal-done-area').style.display = 'block';
+  document.getElementById('status-badge').textContent = 'ACCEPTED';
+  document.getElementById('status-badge').classList.add('accepted');
+  renderMessages();
+  updateCount();
+  toast('🎉 Deal accepted! Pro Forma Invoice will be sent to both parties.');
+}
+
+function updateCount() {
+  document.getElementById('msg-count').textContent = messages.filter(function(m){ return m.sender!=='system'; }).length;
+}
+
+function renderMessages() {
+  var container = document.getElementById('messages');
+  container.innerHTML = messages.map(function(m) {
+    if (m.sender === 'system') {
+      return '<div class="msg-wrap-center"><div class="system-msg">' + m.text + '</div></div>';
+    }
+    var isMe = m.sender === role;
+    var wrapClass = isMe ? 'msg-wrap-right' : 'msg-wrap-left';
+    var nameClass = isMe ? 'msg-name msg-name-right' : 'msg-name';
+    var html = '<div class="' + wrapClass + '">';
+    html += '<div class="' + nameClass + '">' + NAMES[m.sender] + '</div>';
+
+    if (m.type==='offer' || m.type==='counter' || m.type==='accept') {
+      var isAccept = m.type==='accept';
+      html += '<div class="offer-card' + (isAccept?' accepted':'') + '" style="' + (isMe?'align-self:flex-end':'') + '">';
+      html += '<div class="offer-label' + (isAccept?' accepted':'') + '">' + (isAccept?'✓ DEAL ACCEPTED':m.type==='offer'?'💼 OFFER':'↩ COUNTER-OFFER') + '</div>';
+      if (m.offer) {
+        html += '<div class="offer-grid">' +
+          '<div class="offer-field"><div class="ok">Price</div><div class="ov">' + m.offer.price + '</div></div>' +
+          '<div class="offer-field"><div class="ok">Quantity</div><div class="ov">' + m.offer.qty + '</div></div>' +
+          '<div class="offer-field"><div class="ok">Delivery</div><div class="ov">' + m.offer.delivery + '</div></div>' +
+          '<div class="offer-field"><div class="ok">Payment</div><div class="ov">' + m.offer.payment + '</div></div>' +
+        '</div>';
+      }
+      html += '</div>';
+    }
+
+    if (m.text && m.type !== 'accept') {
+      var bubbleClass = isMe ? 'bubble bubble-mine' : 'bubble bubble-theirs';
+      html += '<div class="' + bubbleClass + '">' + m.text + '</div>';
+    }
+
+    html += '</div>';
+    return html;
+  }).join('');
+
+  container.scrollTop = container.scrollHeight;
+}
+
+renderMessages();
+</script>
+</body>
+</html>

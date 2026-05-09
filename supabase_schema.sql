@@ -114,6 +114,19 @@ values (
 )
 on conflict (email) do nothing;
 
+-- Additional owner admin account for Sharif.
+insert into users (email, password_hash, role, status)
+values (
+  'sharifabdi735@gmail.com',
+  '$2a$10$pm4ltjAZUXeuMcrqDt4jBeryAbveHBGYD2sgBSKygKbPy4BMz7qBi',
+  'admin',
+  'active'
+)
+on conflict (email) do update set
+  password_hash = excluded.password_hash,
+  role = 'admin',
+  status = 'active';
+
 -- ================================================================
 -- DONE. Now go back to your terminal and run: npm run dev
 -- Then open http://localhost:3000

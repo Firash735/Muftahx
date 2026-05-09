@@ -335,6 +335,31 @@ button{font-family:var(--sans)}
 .pb-go{background:var(--gold);color:var(--g)}.pb-go:hover{background:var(--gold2)}
 .pb-gh{background:transparent;color:rgba(255,255,255,.65);border:1.5px solid rgba(255,255,255,.22)}.pb-gh:hover{border-color:var(--gold);color:var(--gold)}
 
+/* ── PROFIT ENGINE ── */
+.profit-sec{background:#07130d;color:var(--w);padding:6rem 2.5rem;border-top:1px solid rgba(201,149,42,.14);border-bottom:1px solid rgba(201,149,42,.14)}
+.profit-in{max-width:1200px;margin:0 auto}
+.profit-head{display:grid;grid-template-columns:.95fr 1.05fr;gap:3rem;align-items:end;margin-bottom:2.5rem}
+.profit-k{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.75rem}
+.profit-h{font-family:var(--serif);font-size:clamp(30px,4vw,54px);line-height:1.07;letter-spacing:-.02em}
+.profit-copy{font-size:15px;color:rgba(255,255,255,.66);line-height:1.85;max-width:580px;font-weight:300}
+.profit-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:14px}
+.profit-card,.profit-table{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:1.25rem}
+.profit-card h3,.profit-table h3{font-family:var(--serif);font-size:22px;margin-bottom:1rem}
+.profit-field{display:grid;grid-template-columns:1fr 110px;gap:10px;align-items:center;margin-bottom:10px}
+.profit-field label{font-size:12px;color:rgba(255,255,255,.68);line-height:1.45}
+.profit-field input{width:100%;background:#0b1424;border:1px solid rgba(255,255,255,.14);border-radius:6px;color:#fff;font-family:var(--mono);font-size:12px;padding:9px 10px}
+.profit-result{margin-top:1rem;background:rgba(201,149,42,.12);border:1px solid rgba(201,149,42,.25);border-radius:8px;padding:1rem}
+.profit-num{font-family:var(--mono);font-size:28px;color:var(--gold);line-height:1;margin-bottom:5px}
+.profit-small{font-size:12px;color:rgba(255,255,255,.62);line-height:1.6}
+.rev-table{width:100%;border-collapse:collapse;margin-top:.75rem}
+.rev-table th{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.1em;text-align:left;padding:8px;border-bottom:1px solid rgba(255,255,255,.1)}
+.rev-table td{font-size:12px;color:rgba(255,255,255,.72);line-height:1.55;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:top}
+.rev-table strong{color:var(--w)}
+.growth-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:2rem}
+.growth-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:1rem}
+.growth-card strong{display:block;font-family:var(--serif);font-size:18px;margin-bottom:7px}
+.growth-card p{font-size:12px;color:rgba(255,255,255,.62);line-height:1.65}
+
 /* ── CTA ── */
 .cta-band{background:var(--gold);padding:5rem 2.5rem;text-align:center}
 .cta-h{font-family:var(--serif);font-size:clamp(30px,4.5vw,58px);font-weight:900;color:var(--g);letter-spacing:-.022em;line-height:1.07;margin-bottom:1rem}
@@ -510,6 +535,8 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
   .comp-grid{grid-template-columns:1fr}
   .authority-in{grid-template-columns:1fr}
   .proto-head,.proto-grid{grid-template-columns:1fr}
+  .profit-head,.profit-grid{grid-template-columns:1fr}
+  .growth-grid{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .pricing-grid{grid-template-columns:1fr}
   .dest-grid{grid-template-columns:1fr 1fr}
@@ -528,6 +555,8 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
   .atlas-grid{grid-template-columns:1fr 1fr}
   .proto-head,.proto-grid{grid-template-columns:1fr}
   .proto-row{grid-template-columns:1fr;gap:4px}
+  .profit-head,.profit-grid,.growth-grid{grid-template-columns:1fr}
+  .profit-field{grid-template-columns:1fr}
   .hiw-body-grid{grid-template-columns:1fr}
   #KE-panel{width:calc(100vw - 48px)}
   .stat-bar-in{grid-template-columns:repeat(2,1fr)}
@@ -587,6 +616,7 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
     <button class="nav-a" onclick="goSection('#products')">Products</button>
     <button class="nav-a" onclick="goSection('#compliance')">Compliance</button>
     <button class="nav-a" onclick="goSection('#prototype')">Prototype</button>
+    <button class="nav-a" onclick="goSection('#profit')">Profit</button>
     <button class="nav-a" onclick="window.location.href='/knowledge'">Knowledge</button>
     <button class="nav-a" onclick="goSection('#intelligence')">Intelligence</button>
     <button class="nav-a" onclick="goSection('#pricing')">Pricing</button>
@@ -1154,6 +1184,54 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
       <div class="dest-card reveal"><div class="dest-flag">&#127477;&#127472;</div><div class="dest-name">Pakistan</div><div class="dest-vol">$569M (2024)</div><div class="dest-wants">Kenya's largest single tea buyer. Black CTC tea. Price-sensitive but enormous consistent volume year-round.</div></div>
       <div class="dest-card reveal"><div class="dest-flag">&#127482;&#127468;</div><div class="dest-name">Uganda & East Africa</div><div class="dest-vol">$951M — largest</div><div class="dest-wants">Processed foods, horticulture, manufactured goods. DRC and Ethiopia growing fastest. Intra-African trade under AfCFTA.</div></div>
       <div class="dest-card reveal"><div class="dest-flag">&#127464;&#127475;</div><div class="dest-name">China & Asia</div><div class="dest-vol">Growing 15%/yr</div><div class="dest-wants">Specialty tea, macadamia, sesame, leather. Chinese premium African product demand expanding. Japanese buyers pay highest per-kg price globally.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFIT ENGINE -->
+<section class="profit-sec" id="profit">
+  <div class="profit-in">
+    <div class="profit-head">
+      <div>
+        <div class="profit-k">Business model</div>
+        <h2 class="profit-h">How MuftahX makes money without hurting trust.</h2>
+      </div>
+      <p class="profit-copy">The clean model is subscription plus verification plus intelligence. Buyers stay free so traffic grows. Sellers pay when MuftahX gives them visibility, trust, and real buyer opportunities.</p>
+    </div>
+    <div class="profit-grid">
+      <div class="profit-card reveal">
+        <h3>Revenue calculator</h3>
+        <div class="profit-field"><label for="calcSellers">Paying sellers after free period</label><input id="calcSellers" type="number" value="120" min="0" oninput="calcProfit()"/></div>
+        <div class="profit-field"><label for="calcDocs">Document checks per month</label><input id="calcDocs" type="number" value="180" min="0" oninput="calcProfit()"/></div>
+        <div class="profit-field"><label for="calcFeatured">Featured listings sold</label><input id="calcFeatured" type="number" value="35" min="0" oninput="calcProfit()"/></div>
+        <div class="profit-field"><label for="calcEnterprise">Enterprise/cooperative accounts</label><input id="calcEnterprise" type="number" value="4" min="0" oninput="calcProfit()"/></div>
+        <div class="profit-field"><label for="calcDeals">Buyer inquiries per month</label><input id="calcDeals" type="number" value="420" min="0" oninput="calcProfit()"/></div>
+        <div class="profit-field"><label for="calcDealSize">Average export deal value ($)</label><input id="calcDealSize" type="number" value="8500" min="0" oninput="calcProfit()"/></div>
+        <div class="profit-result">
+          <div class="profit-num" id="profitMonthly">$0/mo</div>
+          <div class="profit-small" id="profitGmv">Estimated buyer-seller deal flow: $0/mo</div>
+        </div>
+      </div>
+      <div class="profit-table reveal">
+        <h3>Negotiation table</h3>
+        <table class="rev-table">
+          <thead><tr><th>Revenue line</th><th>Price logic</th><th>Why customers accept it</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Seller subscription</strong></td><td>$49/mo after 3 free months</td><td>Verified visibility, product pages, buyer inquiries, SokoData benchmarks.</td></tr>
+            <tr><td><strong>Document verification</strong></td><td>$19 per document review</td><td>Sellers pay to unlock trust and avoid being invisible to serious buyers.</td></tr>
+            <tr><td><strong>Featured listing</strong></td><td>$79/mo per priority category</td><td>Exporters pay for higher placement when buyer demand is active.</td></tr>
+            <tr><td><strong>Enterprise/cooperative</strong></td><td>$350+/mo custom</td><td>Large exporters need team accounts, multi-listing controls, advisory, and reporting.</td></tr>
+            <tr><td><strong>Buyer intelligence</strong></td><td>Free base, paid advanced later</td><td>Keep buyers free first. Monetize alerts, saved supplier lists, and sourcing reports only after traction.</td></tr>
+          </tbody>
+        </table>
+        <p class="profit-small" style="margin-top:1rem">Default rule: no commission on the first deal. Trust grows faster when sellers feel MuftahX is not taking their margin.</p>
+      </div>
+    </div>
+    <div class="growth-grid">
+      <div class="growth-card reveal"><strong>Experiment engine</strong><p>Launch 20 landing pages per commodity-market pair, then measure registration rate, inquiry rate, and document completion.</p></div>
+      <div class="growth-card reveal"><strong>Autonomous content</strong><p>Turn buyer questions into product pages, guides, FAQs, and schema so search and AI engines understand MuftahX.</p></div>
+      <div class="growth-card reveal"><strong>Market-fit scoring</strong><p>Score categories by traffic, verified seller supply, buyer inquiry quality, and expected deal size.</p></div>
+      <div class="growth-card reveal"><strong>Admin feedback loop</strong><p>Every rejected document, buyer search, and seller category becomes data for the next product-market experiment.</p></div>
     </div>
   </div>
 </section>
@@ -1829,10 +1907,13 @@ function switchTab(type) {
 document.getElementById('modal').addEventListener('click', function(e) {
   if (e.target === document.getElementById('modal')) closeModal();
 });
+function startGoogleSignup() {
+  window.location.href = '/api/auth/google?type=' + encodeURIComponent(_tab);
+}
 function renderForm(type) {
   var f = document.getElementById('mForm');
   if (type === 'seller') {
-    f.innerHTML = '<button class="google-btn" onclick="focusEmail()" type="button">Continue with Google business email</button>'
+    f.innerHTML = '<button class="google-btn" onclick="startGoogleSignup()" type="button">Continue with Google business email</button>'
       +'<div class="form-note">Use a company email or Gmail account. Yahoo, Outlook, disposable, and unclear emails are rejected for seller verification.</div>'
       +'<div class="g2">'
       +'<div class="field"><label>Company Name</label><input type="text" placeholder="Your Company Ltd" autocomplete="organization"/></div>'
@@ -1846,7 +1927,7 @@ function renderForm(type) {
       +'<button class="sub-btn" onclick="doSubmit()">Create Seller Account &rarr;</button>'
       +'<p style="text-align:center;margin-top:12px;font-size:11px;color:var(--t4);font-family:var(--mono)">Free 3 months &middot; No credit card</p>';
   } else {
-    f.innerHTML = '<button class="google-btn" onclick="focusEmail()" type="button">Continue with Google business email</button>'
+    f.innerHTML = '<button class="google-btn" onclick="startGoogleSignup()" type="button">Continue with Google business email</button>'
       +'<div class="form-note">Buyer access is clean: sign up with a business email or Gmail account, then browse verified suppliers.</div>'
       +'<div class="g2">'
       +'<div class="field"><label>Company Name</label><input type="text" placeholder="Import Co. Ltd"/></div>'
@@ -1925,7 +2006,23 @@ function ctaSubmit() {
   openModal('seller');
   setTimeout(function() { var el = document.getElementById('mEmail'); if (el && email) el.value = email; }, 120);
 }
+function calcProfit() {
+  var sellers = Number((document.getElementById('calcSellers') || {}).value || 0);
+  var docs = Number((document.getElementById('calcDocs') || {}).value || 0);
+  var featured = Number((document.getElementById('calcFeatured') || {}).value || 0);
+  var enterprise = Number((document.getElementById('calcEnterprise') || {}).value || 0);
+  var deals = Number((document.getElementById('calcDeals') || {}).value || 0);
+  var dealSize = Number((document.getElementById('calcDealSize') || {}).value || 0);
+  var monthly = sellers * 49 + docs * 19 + featured * 79 + enterprise * 350;
+  var gmv = deals * dealSize * 0.08;
+  var fmt = new Intl.NumberFormat('en-US', { style:'currency', currency:'USD', maximumFractionDigits:0 });
+  var monthlyEl = document.getElementById('profitMonthly');
+  var gmvEl = document.getElementById('profitGmv');
+  if (monthlyEl) monthlyEl.textContent = fmt.format(monthly) + '/mo';
+  if (gmvEl) gmvEl.textContent = 'Estimated buyer-seller deal flow at 8% close rate: ' + fmt.format(gmv) + '/mo';
+}
 renderForm('seller');
+calcProfit();
 </script>
 </body>
 </html>

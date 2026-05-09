@@ -182,11 +182,29 @@ Click on `users` — you should see the admin account.
 |-----|-----------|
 | `http://localhost:3000` | Main marketplace (your index.html) |
 | `http://localhost:3000/admin` | Admin dashboard — manage registrations |
+| `http://localhost:3000/products` | SEO product directory |
+| `http://localhost:3000/knowledge` | Export knowledge hub |
 | `http://localhost:3000/api/register` | POST endpoint — registration form submits here |
+| `http://localhost:3000/api/auth/google?type=seller` | Starts Google signup through Supabase Auth |
 | `http://localhost:3000/api/login` | POST endpoint — admin login |
 | `http://localhost:3000/api/admin?resource=stats` | GET — stats for admin panel |
 | `http://localhost:3000/api/admin?resource=registrations` | GET — all registrations |
 | `http://localhost:3000/api/admin?resource=exporters` | GET — all exporters |
+
+---
+
+## ENABLE GOOGLE SIGNUP
+
+The Google signup button uses Supabase Auth. To make it live:
+
+1. Go to Supabase → Authentication → Providers.
+2. Enable Google.
+3. Add your Google OAuth Client ID and Client Secret.
+4. In Google Cloud Console, add your callback URL from Supabase Auth settings.
+5. Keep `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`.
+
+After that, the signup buttons route through:
+`/api/auth/google?type=seller` or `/api/auth/google?type=buyer`.
 
 ---
 

@@ -190,22 +190,25 @@ Click on `users` — you should see the admin account.
 
 ---
 
-## DEPLOY TO THE INTERNET (Vercel — free)
+## DEPLOY TO THE INTERNET
 
-When you are ready to make it live:
+When you are ready to make it live, push the latest `main` branch to GitHub and connect the repository to your preferred hosting provider. The hosting service must support Next.js and these environment variables from `.env.local`:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `JWT_SECRET`
+
+For a production server you control:
 
 ```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Deploy
-vercel --prod
+npm install
+npm run build
+npm run start
 ```
 
-Then in Vercel dashboard → your project → Settings → Environment Variables:
-Add the same 4 variables from your `.env.local` file.
-
-Your site will be live at: `https://muftahx.vercel.app`
+For GitHub-based deployment, use the repository:
+`https://github.com/Firash735/muftahx`
 
 ---
 

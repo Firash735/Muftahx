@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>MuftahX — Kenya's Global Export Marketplace</title>
 <meta name="description" content="MuftahX connects verified Kenyan exporters with global buyers. Tea, coffee, flowers, avocado, macadamia, apparel, leather, spices, livestock, oils."/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MuftahX",
+  "description": "Verified B2B export marketplace for Kenyan sellers, global buyers, compliance documents, product photos, market intelligence, and fraud-risk review.",
+  "areaServed": ["Kenya", "European Union", "United States", "United Arab Emirates", "Pakistan", "China"],
+  "knowsAbout": ["Kenyan exports", "KEPHIS verification", "GlobalGAP", "AFA HCD", "FDA registration", "B2B marketplace", "Generative Engine Optimisation"],
+  "makesOffer": [
+    { "@type": "Offer", "name": "Verified Kenyan supplier listings" },
+    { "@type": "Offer", "name": "Document and fraud-risk verification" },
+    { "@type": "Offer", "name": "SokoData market price intelligence" }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -53,13 +68,13 @@ button{font-family:var(--sans)}
 .page-pt{padding-top:66px}
 
 /* ── HERO ── */
-.hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;margin-top:66px}
-.hero-left{background:var(--g);padding:5rem 4rem 4rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero{min-height:92vh;display:block;margin-top:66px;position:relative;overflow:hidden;background:#07130d}
+.hero-left{min-height:92vh;background:linear-gradient(90deg,rgba(7,19,13,.94) 0%,rgba(7,19,13,.82) 48%,rgba(7,19,13,.32) 100%);padding:5rem 4rem 4rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;z-index:2}
 .hero-left::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(60deg,transparent 0,transparent 22px,rgba(255,255,255,.015) 22px,rgba(255,255,255,.015) 23px),repeating-linear-gradient(-60deg,transparent 0,transparent 22px,rgba(255,255,255,.015) 22px,rgba(255,255,255,.015) 23px);pointer-events:none}
-.hero-right{position:relative;overflow:hidden}
+.hero-right{position:absolute;inset:0;overflow:hidden;z-index:1}
 .hero-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s ease}
 .hero-photo:hover{transform:scale(1.04)}
-.hero-photo-overlay{position:absolute;inset:0;background:linear-gradient(90deg,var(--g) 0,transparent 30%),linear-gradient(180deg,transparent 60%,rgba(10,20,15,.6) 100%)}
+.hero-photo-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,19,13,.9) 0%,rgba(7,19,13,.55) 42%,rgba(7,19,13,.18) 100%),linear-gradient(180deg,rgba(7,19,13,.1) 45%,rgba(7,19,13,.86) 100%)}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;font-weight:500;color:var(--gold);background:rgba(201,149,42,.1);border:1px solid rgba(201,149,42,.22);padding:5px 14px;border-radius:20px;margin-bottom:1.75rem;letter-spacing:.12em;width:fit-content}
 .pulse{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,149,42,.5)}50%{box-shadow:0 0 0 8px rgba(201,149,42,0)}}
@@ -74,6 +89,22 @@ button{font-family:var(--sans)}
 .hero-trust{display:flex;gap:1.75rem;flex-wrap:wrap}
 .ht{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.05em}
 .ht-dot{width:4px;height:4px;border-radius:50%;background:var(--g4)}
+.hero-proof{display:grid;grid-template-columns:repeat(3,minmax(140px,1fr));gap:1px;max-width:680px;margin-top:2rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.12)}
+.hero-proof-item{background:rgba(7,19,13,.72);padding:14px 16px}
+.hero-proof-k{font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+.hero-proof-v{font-size:12px;color:rgba(255,255,255,.72);line-height:1.45}
+
+/* ── AUTHORITY SECTION ── */
+.authority-sec{background:#07130d;color:var(--w);padding:5rem 2.5rem;border-top:1px solid rgba(201,149,42,.14)}
+.authority-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:4rem;align-items:start}
+.authority-kicker{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;margin-bottom:1rem}
+.authority-h{font-family:var(--serif);font-size:clamp(30px,4vw,54px);line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem}
+.authority-copy{font-size:15px;color:rgba(255,255,255,.68);line-height:1.85;max-width:460px;font-weight:300}
+.authority-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.authority-card{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);border-radius:8px;padding:1.25rem}
+.authority-card strong{display:block;font-family:var(--serif);font-size:18px;color:var(--w);line-height:1.25;margin-bottom:8px}
+.authority-card p{font-size:12px;color:rgba(255,255,255,.62);line-height:1.72}
+.authority-card span{display:block;font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-top:12px}
 
 /* ── STAT BAR ── */
 .stat-bar{background:var(--navy);border-top:1px solid rgba(201,149,42,.12)}
@@ -129,6 +160,44 @@ button{font-family:var(--sans)}
 .pc-seller{font-size:11px;color:var(--t3)}
 .btn-pc{font-family:var(--mono);font-size:10px;font-weight:700;padding:7px 16px;background:var(--gold);color:var(--g);border:none;border-radius:5px;cursor:pointer;transition:all .15s;letter-spacing:.05em}
 .btn-pc:hover{background:var(--gold2)}
+
+/* ── PRODUCT ATLAS ── */
+.atlas-sec{background:var(--w);border-bottom:1px solid var(--l2)}
+.atlas-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:2.5rem}
+.atlas-card{position:relative;min-height:190px;border-radius:8px;overflow:hidden;background:#0d1a12;cursor:pointer;border:1px solid var(--l2)}
+.atlas-card img{width:100%;height:100%;min-height:190px;object-fit:cover;transition:transform .35s,filter .35s}
+.atlas-card:hover img{transform:scale(1.06);filter:saturate(1.05)}
+.atlas-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(0,0,0,.76) 100%)}
+.atlas-meta{position:absolute;left:12px;right:12px;bottom:12px;z-index:2;color:#fff}
+.atlas-name{font-family:var(--serif);font-size:18px;font-weight:700;line-height:1.1;margin-bottom:4px}
+.atlas-proof{font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+
+/* ── PLATFORM PROTOTYPE ── */
+.proto-sec{background:#07130d;color:var(--w);padding:6rem 2.5rem;border-top:1px solid rgba(201,149,42,.14);border-bottom:1px solid rgba(201,149,42,.14)}
+.proto-in{max-width:1200px;margin:0 auto}
+.proto-head{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:end;margin-bottom:2.5rem}
+.proto-k{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.75rem}
+.proto-h{font-family:var(--serif);font-size:clamp(30px,4vw,54px);line-height:1.07;letter-spacing:-.02em}
+.proto-copy{font-size:15px;color:rgba(255,255,255,.66);line-height:1.85;max-width:560px;font-weight:300}
+.proto-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;align-items:stretch}
+.proto-screen{background:#0b1424;border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.proto-top{height:42px;background:#111b2d;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;padding:0 14px}
+.proto-dots{display:flex;gap:6px}.proto-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.22)}.proto-dots span:first-child{background:#f87171}.proto-dots span:nth-child(2){background:var(--gold)}.proto-dots span:nth-child(3){background:#74c69d}
+.proto-url{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.42)}
+.proto-body{padding:18px}
+.proto-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}
+.proto-title{font-family:var(--serif);font-size:22px;font-weight:700}
+.proto-pill{font-family:var(--mono);font-size:9px;color:#74c69d;background:rgba(116,198,157,.1);border:1px solid rgba(116,198,157,.22);border-radius:14px;padding:4px 9px;white-space:nowrap}
+.proto-table{display:grid;gap:8px}
+.proto-row{display:grid;grid-template-columns:1.1fr .8fr .7fr .7fr;gap:10px;align-items:center;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:10px 12px;font-size:11px;color:rgba(255,255,255,.72)}
+.proto-row.head{background:transparent;border:none;color:rgba(255,255,255,.35);font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;padding-bottom:0}
+.risk-low{color:#74c69d}.risk-med{color:var(--gold)}.risk-high{color:#f87171}
+.proto-side{display:grid;grid-template-rows:1fr 1fr;gap:14px}
+.proto-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:1.25rem}
+.proto-panel h3{font-family:var(--serif);font-size:20px;margin-bottom:1rem}
+.proto-list{display:flex;flex-direction:column;gap:9px}
+.proto-item{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,.66);line-height:1.55}
+.proto-check{width:18px;height:18px;border-radius:50%;background:rgba(201,149,42,.14);border:1px solid rgba(201,149,42,.35);color:var(--gold);font-family:var(--mono);font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
 /* ── CATEGORIES ── */
 .cat-sec{background:var(--g)}
@@ -379,19 +448,22 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
 /* ── MODAL ── */
 .modal-ov{position:fixed;inset:0;background:rgba(10,18,30,.88);backdrop-filter:blur(10px);z-index:800;display:none;align-items:center;justify-content:center;padding:1rem}
 .modal-ov.open{display:flex}
-.modal{background:var(--w);border-radius:var(--r2);padding:2.5rem;width:480px;max-width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.3);animation:slideUp .25s ease}
+.modal{background:var(--w);border-radius:var(--r2);padding:2rem;width:480px;max-width:100%;max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.3);animation:slideUp .25s ease}
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .modal-x{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;color:var(--t4);cursor:pointer;transition:color .15s}
 .modal-x:hover{color:var(--t)}
 .modal-h{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--t);margin-bottom:5px}
-.modal-s{font-size:13px;color:var(--t3);margin-bottom:1.5rem;line-height:1.6}
-.modal-tabs{display:flex;border-bottom:2px solid var(--l2);margin-bottom:1.25rem}
+.modal-s{font-size:13px;color:var(--t3);margin-bottom:1rem;line-height:1.6}
+.modal-tabs{display:flex;border-bottom:2px solid var(--l2);margin-bottom:1rem}
 .modal-tab{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--t3);padding:8px 18px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;margin-bottom:-2px;transition:all .15s;letter-spacing:.04em}
 .modal-tab.active{color:var(--g);border-bottom-color:var(--g)}
-.field{margin-bottom:14px}
+.field{margin-bottom:10px}
 .field label{display:block;font-family:var(--mono);font-size:9px;font-weight:500;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
-.field input,.field select{width:100%;background:var(--off);border:1.5px solid var(--l2);color:var(--t);font-family:var(--mono);font-size:12px;padding:10px 12px;border-radius:6px;outline:none;transition:border-color .15s}
+.field input,.field select{width:100%;background:var(--off);border:1.5px solid var(--l2);color:var(--t);font-family:var(--mono);font-size:12px;padding:9px 12px;border-radius:6px;outline:none;transition:border-color .15s}
 .field input:focus,.field select:focus{border-color:var(--g);background:var(--w)}
+.google-btn{width:100%;padding:10px 12px;background:var(--w);border:1.5px solid var(--l2);border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--t2);cursor:pointer;margin-bottom:.75rem}
+.google-btn:hover{border-color:var(--gbr);background:var(--gb)}
+.form-note{font-size:11px;color:var(--t3);line-height:1.5;margin:-4px 0 10px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .f-err{font-family:var(--mono);font-size:10px;color:#dc2626;min-height:14px;margin-bottom:8px}
 .sub-btn{width:100%;padding:13px;background:var(--g);color:var(--w);font-family:var(--mono);font-size:12px;font-weight:700;border:none;border-radius:6px;cursor:pointer;transition:all .15s;letter-spacing:.05em}
@@ -430,11 +502,13 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
-  .hero{grid-template-columns:1fr}
-  .hero-right{display:none}
+  .hero-left{background:linear-gradient(180deg,rgba(7,19,13,.94),rgba(7,19,13,.62))}
   .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .atlas-grid{grid-template-columns:repeat(3,1fr)}
   .cat-grid{grid-template-columns:repeat(3,1fr)}
   .comp-grid{grid-template-columns:1fr}
+  .authority-in{grid-template-columns:1fr}
+  .proto-head,.proto-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .pricing-grid{grid-template-columns:1fr}
   .dest-grid{grid-template-columns:1fr 1fr}
@@ -449,6 +523,10 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
   .dest-grid{grid-template-columns:1fr}
   .cta-row{flex-direction:column}
   .hero-left{padding:3.5rem 1.5rem 2.5rem}
+  .hero-proof,.authority-grid{grid-template-columns:1fr}
+  .atlas-grid{grid-template-columns:1fr 1fr}
+  .proto-head,.proto-grid{grid-template-columns:1fr}
+  .proto-row{grid-template-columns:1fr;gap:4px}
   .hiw-body-grid{grid-template-columns:1fr}
   #KE-panel{width:calc(100vw - 48px)}
   .stat-bar-in{grid-template-columns:repeat(2,1fr)}
@@ -507,6 +585,7 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
   <div class="nav-links">
     <button class="nav-a" onclick="goSection('#products')">Products</button>
     <button class="nav-a" onclick="goSection('#compliance')">Compliance</button>
+    <button class="nav-a" onclick="goSection('#prototype')">Prototype</button>
     <button class="nav-a" onclick="goSection('#intelligence')">Intelligence</button>
     <button class="nav-a" onclick="goSection('#pricing')">Pricing</button>
   </div>
@@ -522,9 +601,9 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="eyebrow"><div class="pulse"></div>KENYA B2B EXPORT MARKETPLACE</div>
-    <h1 class="hero-h">Kenya's finest<br>exports.<em>The world's buyers.</em></h1>
-    <p class="hero-sub">MuftahX connects compliance-verified Kenyan exporters directly with buyers in 40+ countries. Not Kenya-first. Not Africa-first. <strong style="color:var(--gold)">Global first.</strong> Every seller KEPHIS-certified. Every listing shows live market prices.</p>
+    <div class="eyebrow"><div class="pulse"></div>VERIFIED KENYAN EXPORT INFRASTRUCTURE</div>
+    <h1 class="hero-h">Proof-first exports<br><em>for serious global buyers.</em></h1>
+    <p class="hero-sub">MuftahX gives decision-makers what broad websites hide: verified sellers, document status, live benchmarks, product photos, and clear authority signals before a buyer ever sends an inquiry.</p>
     <div class="hero-actions">
       <button class="btn-hg" onclick="openModal('seller')">Start Exporting &rarr;</button>
       <button class="btn-hgh" onclick="goSection('#products')">Browse Products &#8595;</button>
@@ -535,9 +614,14 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
       <div class="ht"><div class="ht-dot"></div>FDA Registered</div>
       <div class="ht"><div class="ht-dot"></div>3 Months Free</div>
     </div>
+    <div class="hero-proof">
+      <div class="hero-proof-item"><div class="hero-proof-k">Authority</div><div class="hero-proof-v">Certificates, source, score, and market fit shown up front.</div></div>
+      <div class="hero-proof-item"><div class="hero-proof-k">Discovery</div><div class="hero-proof-v">Content shaped for intent-rich buyer and AI search queries.</div></div>
+      <div class="hero-proof-item"><div class="hero-proof-k">Trust</div><div class="hero-proof-v">Fraud-risk review before sellers become visible.</div></div>
+    </div>
   </div>
   <div class="hero-right">
-    <img class="hero-photo" src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=1200&q=85" alt="Kenya highlands landscape"/>
+    <img class="hero-photo" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=85" alt="Export team reviewing verified trade documents"/>
     <div class="hero-photo-overlay"></div>
   </div>
 </section>
@@ -581,6 +665,39 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
     </div>
   </div>
 </div>
+
+<!-- AUTHORITY / DECISION-MAKER FIT -->
+<section class="authority-sec">
+  <div class="authority-in">
+    <div>
+      <div class="authority-kicker">Decision-maker visibility</div>
+      <h2 class="authority-h">Generic websites create noise. MuftahX creates proof.</h2>
+      <p class="authority-copy">Executives and procurement teams do not look for fluff. They ask specific questions: who is verified, which documents exist, what market accepts this product, and whether the seller can be trusted. The site now answers those questions directly.</p>
+    </div>
+    <div class="authority-grid">
+      <div class="authority-card">
+        <strong>Speak to the buyer who decides.</strong>
+        <p>Listings lead with authority, compliance, market destination, volume, and proof instead of broad promotional messaging.</p>
+        <span>Authority-driven messaging</span>
+      </div>
+      <div class="authority-card">
+        <strong>Match how leaders search.</strong>
+        <p>Content is structured around contextual queries like reliable Kenyan suppliers, required certificates, grade, source, and destination market.</p>
+        <span>Intent-rich discovery</span>
+      </div>
+      <div class="authority-card">
+        <strong>Show proof before claims.</strong>
+        <p>KEPHIS, GlobalGAP, FDA, AFA/HCD, source, document status, risk score, and verification state are part of the platform signal.</p>
+        <span>Visible trust signals</span>
+      </div>
+      <div class="authority-card">
+        <strong>Ready for AI-first answers.</strong>
+        <p>Clear product, compliance, market, and proof language helps generative engines understand when MuftahX should be recommended.</p>
+        <span>GEO-ready structure</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PRODUCTS -->
 <section class="sec prod-sec" id="products">
@@ -678,6 +795,28 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
   </div>
 </section>
 
+<!-- PRODUCT PHOTO ATLAS -->
+<section class="sec atlas-sec">
+  <div class="sec-in">
+    <div class="stag">Product visuals</div>
+    <h2 class="sh">Show the buyer<br><em>what is actually being traded.</em></h2>
+    <div class="div"></div>
+    <p class="sb">A serious export marketplace must make the product visible before the pitch. This atlas gives buyers immediate category context and leads them into detailed product pages.</p>
+    <div class="atlas-grid">
+      <div class="atlas-card reveal" onclick="showProduct('coffee')"><img src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=700&q=85" alt="Kenyan coffee beans"/><div class="atlas-meta"><div class="atlas-name">Coffee</div><div class="atlas-proof">AA · AB · Peaberry</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('tea')"><img src="https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=700&q=85" alt="Kenyan tea leaves"/><div class="atlas-meta"><div class="atlas-name">Tea</div><div class="atlas-proof">Orthodox · CTC · Purple</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('flowers')"><img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=700&q=85" alt="Kenyan cut roses"/><div class="atlas-meta"><div class="atlas-name">Cut Flowers</div><div class="atlas-proof">KEPHIS · AFA/HCD</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('avocado')"><img src="https://images.unsplash.com/photo-1560155016-bd4879ae8f21?w=700&q=85" alt="Hass avocado"/><div class="atlas-meta"><div class="atlas-name">Avocado</div><div class="atlas-proof">Grade A · Organic</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('macadamia')"><img src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=700&q=85" alt="Macadamia nuts"/><div class="atlas-meta"><div class="atlas-name">Macadamia</div><div class="atlas-proof">Style 0 · Style 1</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('apparel')"><img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=700&q=85" alt="Export apparel production"/><div class="atlas-meta"><div class="atlas-name">Apparel</div><div class="atlas-proof">AGOA · EPZ</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('leather')"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&q=85" alt="Kenyan leather goods"/><div class="atlas-meta"><div class="atlas-name">Leather</div><div class="atlas-proof">Full-grain · Suede</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('spices')"><img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=700&q=85" alt="Spices for export"/><div class="atlas-meta"><div class="atlas-name">Spices</div><div class="atlas-proof">Residue-tested</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('oils')"><img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=700&q=85" alt="Export cooking oils"/><div class="atlas-meta"><div class="atlas-name">Fats & Oils</div><div class="atlas-proof">Plant-derived oils</div></div></div>
+      <div class="atlas-card reveal" onclick="showProduct('animals')"><img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=700&q=85" alt="Kenyan livestock"/><div class="atlas-meta"><div class="atlas-name">Live Animals</div><div class="atlas-proof">KVA · Halal · Gulf</div></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- CATEGORIES -->
 <div class="cat-sec">
   <div class="cat-in">
@@ -698,6 +837,61 @@ footer{background:var(--g);padding:4rem 2.5rem 2rem}
     </div>
   </div>
 </div>
+
+<!-- PLATFORM PROTOTYPE -->
+<section class="proto-sec" id="prototype">
+  <div class="proto-in">
+    <div class="proto-head">
+      <div>
+        <div class="proto-k">Working prototype direction</div>
+        <h2 class="proto-h">MuftahX should feel like a verification system, not a brochure.</h2>
+      </div>
+      <p class="proto-copy">The next professional level is showing buyers and sellers the actual operating layer: document review, fraud risk, verified listings, buyer intent, and market intelligence in one place.</p>
+    </div>
+    <div class="proto-grid">
+      <div class="proto-screen reveal">
+        <div class="proto-top">
+          <div class="proto-dots"><span></span><span></span><span></span></div>
+          <div class="proto-url">admin.muftahx.com / verification-console</div>
+        </div>
+        <div class="proto-body">
+          <div class="proto-toolbar">
+            <div>
+              <div class="proto-title">Verification Console</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:3px">Automatic risk review before a seller becomes visible.</div>
+            </div>
+            <div class="proto-pill">7 reload requests</div>
+          </div>
+          <div class="proto-table">
+            <div class="proto-row head"><div>Company</div><div>Documents</div><div>Risk</div><div>Action</div></div>
+            <div class="proto-row"><div>Naivasha Rose Growers</div><div>KEPHIS + AFA/HCD</div><div class="risk-low">08/100</div><div>Verified</div></div>
+            <div class="proto-row"><div>Fresh Horticulture Kenya</div><div>Missing upload link</div><div class="risk-med">35/100</div><div>Reload</div></div>
+            <div class="proto-row"><div>Demo Export Company</div><div>No certificate reference</div><div class="risk-high">75/100</div><div>Rejected</div></div>
+            <div class="proto-row"><div>Kericho Highland Tea</div><div>KEPHIS + FDA</div><div class="risk-low">12/100</div><div>Verified</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="proto-side">
+        <div class="proto-panel reveal">
+          <h3>Buyer View</h3>
+          <div class="proto-list">
+            <div class="proto-item"><span class="proto-check">1</span><div>Search by commodity, destination market, certification, available volume, and seller risk status.</div></div>
+            <div class="proto-item"><span class="proto-check">2</span><div>Open a product page with photos, grades, price benchmarks, certificate requirements, and buyer-market proof.</div></div>
+            <div class="proto-item"><span class="proto-check">3</span><div>Send a direct inquiry only to sellers whose documents are visible and approved.</div></div>
+          </div>
+        </div>
+        <div class="proto-panel reveal">
+          <h3>Seller View</h3>
+          <div class="proto-list">
+            <div class="proto-item"><span class="proto-check">1</span><div>Create account with business email or Gmail, then upload certificate number or document link.</div></div>
+            <div class="proto-item"><span class="proto-check">2</span><div>See what is missing: KEPHIS, GlobalGAP, AFA/HCD, FDA, KVA, AGOA, or market-specific paperwork.</div></div>
+            <div class="proto-item"><span class="proto-check">3</span><div>Go live only after verification, then receive buyer inquiries without platform commissions.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- HOW IT WORKS — INTERACTIVE -->
 <section class="sec hiw-sec">
@@ -1634,33 +1828,47 @@ document.getElementById('modal').addEventListener('click', function(e) {
 function renderForm(type) {
   var f = document.getElementById('mForm');
   if (type === 'seller') {
-    f.innerHTML = '<div class="g2">'
+    f.innerHTML = '<button class="google-btn" onclick="focusEmail()" type="button">Continue with Google business email</button>'
+      +'<div class="form-note">Use a company email or Gmail account. Yahoo, Outlook, disposable, and unclear emails are rejected for seller verification.</div>'
+      +'<div class="g2">'
       +'<div class="field"><label>Company Name</label><input type="text" placeholder="Your Company Ltd" autocomplete="organization"/></div>'
       +'<div class="field"><label>Your Name</label><input type="text" placeholder="James Kamau" autocomplete="name"/></div>'
       +'</div>'
-      +'<div class="field"><label for="mEmail">Business Email</label><input id="mEmail" type="email" placeholder="export@company.co.ke" autocomplete="email"/></div>'
+      +'<div class="field"><label for="mEmail">Business Email or Gmail</label><input id="mEmail" type="email" placeholder="export@company.co.ke" autocomplete="email"/></div>'
       +'<div class="field"><label>Primary Export Category</label><select><option>Cut Flowers</option><option>Tea & Coffee</option><option>Avocado & Fruits</option><option>Vegetables & Spices</option><option>Apparel</option><option>Fats & Oils</option><option>Macadamia & Nuts</option><option>Live Animals</option><option>Leather Goods</option></select></div>'
       +'<div class="field"><label>Compliance Documents</label><select><option>KEPHIS only</option><option>KEPHIS + GlobalGAP</option><option>KEPHIS + GlobalGAP + FDA</option><option>KEPHIS + AFA/HCD</option><option>Still getting certified</option></select></div>'
+      +'<div class="field"><label>Certificate Number or Upload Link</label><input type="text" placeholder="KEPHIS-2026-001 or https://drive.google.com/..."/></div>'
       +'<div class="f-err" id="fErr"></div>'
       +'<button class="sub-btn" onclick="doSubmit()">Create Seller Account &rarr;</button>'
       +'<p style="text-align:center;margin-top:12px;font-size:11px;color:var(--t4);font-family:var(--mono)">Free 3 months &middot; No credit card</p>';
   } else {
-    f.innerHTML = '<div class="g2">'
+    f.innerHTML = '<button class="google-btn" onclick="focusEmail()" type="button">Continue with Google business email</button>'
+      +'<div class="form-note">Buyer access is clean: sign up with a business email or Gmail account, then browse verified suppliers.</div>'
+      +'<div class="g2">'
       +'<div class="field"><label>Company Name</label><input type="text" placeholder="Import Co. Ltd"/></div>'
       +'<div class="field"><label>Country</label><select><option>Netherlands</option><option>United Kingdom</option><option>Germany</option><option>United States</option><option>UAE</option><option>Pakistan</option><option>China</option><option>Other</option></select></div>'
       +'</div>'
-      +'<div class="field"><label for="mEmail">Business Email</label><input id="mEmail" type="email" placeholder="import@company.com" autocomplete="email"/></div>'
+      +'<div class="field"><label for="mEmail">Business Email or Gmail</label><input id="mEmail" type="email" placeholder="import@company.com" autocomplete="email"/></div>'
       +'<div class="field"><label>What are you sourcing?</label><select><option>Cut Flowers</option><option>Tea & Coffee</option><option>Avocado & Fruits</option><option>Apparel</option><option>Macadamia</option><option>Live Animals</option><option>Multiple categories</option></select></div>'
       +'<div class="f-err" id="fErr"></div>'
       +'<button class="sub-btn" onclick="doSubmit()">Find Verified Suppliers &rarr;</button>'
       +'<p style="text-align:center;margin-top:12px;font-size:11px;color:var(--t4);font-family:var(--mono)">Free buyer access &middot; Verified sellers only</p>';
   }
 }
+function focusEmail() {
+  var el = document.getElementById('mEmail');
+  if (el) el.focus();
+}
 function doSubmit() {
   var email = document.getElementById('mEmail') ? document.getElementById('mEmail').value.trim() : '';
   var err = document.getElementById('fErr');
   if (!email) { if (err) err.textContent = 'Please enter your business email.'; return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { if (err) err.textContent = 'Please enter a valid email address.'; return; }
+  var domain = email.toLowerCase().split('@')[1] || '';
+  if (['yahoo.com','hotmail.com','outlook.com','icloud.com','aol.com'].indexOf(domain) >= 0) {
+    if (err) err.textContent = 'Use a business email or Gmail account for clean registration.';
+    return;
+  }
 
   // Collect all form fields
   var payload = { type: _tab, email: email };
@@ -1674,6 +1882,7 @@ function doSubmit() {
     if (lbl.includes('country')) payload.country = el.value;
     if (lbl.includes('category') || lbl.includes('export category')) payload.category = el.value;
     if (lbl.includes('compliance')) payload.compliance = el.value;
+    if (lbl.includes('certificate number') || lbl.includes('upload link')) payload.document_ref = el.value;
     if (lbl.includes('sourcing') || lbl.includes('what are')) payload.sourcing = el.value;
   });
 
@@ -1688,9 +1897,11 @@ function doSubmit() {
   })
   .then(function(r) { return r.json(); })
   .then(function(data) {
-    closeModal();
-    if (data.success) { _showBanner(data.message); }
-    else { setTimeout(function() { if (err) { err.textContent = data.error || 'Error — please try again.'; if (btn) { btn.disabled = false; btn.textContent = _tab === 'seller' ? 'Create Seller Account →' : 'Find Verified Suppliers →'; } } }, 200); }
+    if (data.success) { closeModal(); _showBanner(data.message); }
+    else if (err) {
+      err.textContent = data.error || 'Error — please try again.';
+      if (btn) { btn.disabled = false; btn.textContent = _tab === 'seller' ? 'Create Seller Account &rarr;' : 'Find Verified Suppliers &rarr;'; }
+    }
   })
   .catch(function() {
     closeModal();

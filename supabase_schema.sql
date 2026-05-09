@@ -29,10 +29,22 @@ create table if not exists registrations (
   category      text,
   compliance    text,
   sourcing      text,
+  document_ref  text,
+  document_status text    default 'pending' check (document_status in ('pending','verified','rejected','reload_requested')),
+  fraud_score   integer   default 0,
+  fraud_flags   text,
+  rejection_reason text,
   status        text        default 'new' check (status in ('new','contacted','converted','rejected')),
   notes         text,
   created_at    timestamptz default now()
 );
+
+-- Upgrade existing projects created from an older version of this schema.
+alter table registrations add column if not exists document_ref text;
+alter table registrations add column if not exists document_status text default 'pending' check (document_status in ('pending','verified','rejected','reload_requested'));
+alter table registrations add column if not exists fraud_score integer default 0;
+alter table registrations add column if not exists fraud_flags text;
+alter table registrations add column if not exists rejection_reason text;
 
 -- ── EXPORTERS (populated by data engine) ─────────────────────
 create table if not exists exporters (
@@ -74,6 +86,7 @@ create policy "public_read_exporters"
 create index if not exists idx_reg_type    on registrations(type);
 create index if not exists idx_reg_status  on registrations(status);
 create index if not exists idx_reg_email   on registrations(email);
+create index if not exists idx_reg_doc_status on registrations(document_status);
 create index if not exists idx_exp_cat     on exporters(category);
 create index if not exists idx_exp_score   on exporters(data_score desc);
 

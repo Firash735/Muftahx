@@ -5,12 +5,14 @@ type Reg = {
   id: string; type: string; email: string; company_name: string;
   contact_name: string; country: string; category: string;
   compliance: string; sourcing: string; status: string; created_at: string;
+  document_ref?: string; document_status?: string; fraud_score?: number;
+  fraud_flags?: string; rejection_reason?: string;
 };
 type Exp = {
   id: string; company_name: string; category: string; email: string;
   phone: string; website: string; is_verified: boolean; data_score: number; source: string;
 };
-type Stats = { total: number; sellers: number; buyers: number; exporters: number };
+type Stats = { total: number; sellers: number; buyers: number; review: number };
 
 const G = '#1b4332', GOLD = '#c9952a', NAVY = '#0f2044';
 
@@ -70,8 +72,22 @@ export default function Admin() {
     if (d.success) { setRegs(p => p.map(x => x.id === id ? { ...x, status } : x)); toast_('✓ Status updated to "' + status + '"'); }
   };
 
+  const updateDocumentStatus = async (id: string, document_status: string) => {
+    const updates: Partial<Reg> = { document_status };
+    if (document_status === 'rejected' || document_status === 'reload_requested') updates.status = 'rejected';
+    const r = await fetch('/api/admin', {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, table: 'registrations', updates }),
+    });
+    const d = await r.json();
+    if (d.success) {
+      setRegs(p => p.map(x => x.id === id ? { ...x, ...updates } : x));
+      toast_('✓ Document status updated to "' + document_status + '"');
+    }
+  };
+
   const filtRegs = regs.filter(r => {
-    const m = filter === 'all' || r.type === filter || r.status === filter;
+    const m = filter === 'all' || r.type === filter || r.status === filter || r.document_status === filter;
     const s = !search || r.email?.toLowerCase().includes(search.toLowerCase()) || r.company_name?.toLowerCase().includes(search.toLowerCase());
     return m && s;
   });
@@ -165,7 +181,7 @@ export default function Admin() {
               { label:'Total Registrations', val: stats.total,     col:'#c9952a' },
               { label:'Sellers',             val: stats.sellers,   col:'#74c69d' },
               { label:'Buyers',              val: stats.buyers,    col:'#60a5fa' },
-              { label:'Exporters in DB',     val: stats.exporters, col:'#a78bfa' },
+              { label:'Needs Document Reload', val: stats.review,   col:'#f87171' },
             ].map(s => (
               <div key={s.label} style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.08)', borderRadius:12, padding:'1.25rem' }}>
                 <div style={{ fontSize:34, fontWeight:500, color: s.col, lineHeight:1 }}>{s.val}</div>
@@ -189,7 +205,7 @@ export default function Admin() {
             placeholder={tab === 'regs' ? 'Search email or company…' : 'Search exporter or category…'}
             style={{ flex:1, minWidth:220, background:'rgba(255,255,255,.06)', border:'1px solid rgba(255,255,255,.13)', color:'#fff', padding:'9px 14px', borderRadius:8, fontSize:12, outline:'none', fontFamily:'monospace' }} />
 
-          {tab === 'regs' && ['all','seller','buyer','new','contacted','converted','rejected'].map(f => (
+          {tab === 'regs' && ['all','seller','buyer','new','contacted','converted','rejected','reload_requested'].map(f => (
             <button key={f} onClick={() => setFilter(f)}
               style={{ padding:'8px 14px', borderRadius:6, fontSize:11, cursor:'pointer',
                 border: filter===f ? 'none' : '1px solid rgba(255,255,255,.13)',
@@ -206,7 +222,7 @@ export default function Admin() {
             <table style={{ width:'100%', borderCollapse:'collapse', minWidth:900 }}>
               <thead>
                 <tr style={{ borderBottom:'1px solid rgba(255,255,255,.07)' }}>
-                  {['Date','Type','Email','Company','Category / Country','Compliance / Sourcing','Status','Change'].map(h => (
+                  {['Date','Type','Email','Company','Category / Country','Document / Fraud','Status','Change'].map(h => (
                     <th key={h} style={{ padding:'10px 14px', textAlign:'left', fontSize:9, color:'rgba(255,255,255,.35)', letterSpacing:'.1em', textTransform:'uppercase', whiteSpace:'nowrap' }}>{h}</th>
                   ))}
                 </tr>
@@ -236,7 +252,28 @@ export default function Admin() {
                     <td style={TD}>{r.email}</td>
                     <td style={TD}>{r.company_name || '—'}</td>
                     <td style={TD}>{r.type==='seller' ? r.category : r.country || '—'}</td>
-                    <td style={TD}><span style={{ color:'rgba(255,255,255,.45)', fontSize:11 }}>{r.compliance || r.sourcing || '—'}</span></td>
+                    <td style={TD}>
+                      <div style={{ fontSize:11, color:'rgba(255,255,255,.55)', lineHeight:1.6 }}>
+                        <div>{r.document_ref || r.compliance || r.sourcing || 'No document reference'}</div>
+                        <div style={{ display:'flex', gap:6, alignItems:'center', flexWrap:'wrap', marginTop:4 }}>
+                          <span style={{ padding:'2px 7px', borderRadius:4, fontSize:9, fontWeight:700,
+                            background: SBG[r.document_status || 'pending'] || 'rgba(255,255,255,.08)',
+                            color: SC[r.document_status || 'pending'] || 'rgba(255,255,255,.5)' }}>
+                            {r.document_status || 'pending'}
+                          </span>
+                          <span style={{ color:(r.fraud_score || 0) >= 50 ? '#f87171' : (r.fraud_score || 0) >= 25 ? GOLD : '#74c69d', fontSize:10 }}>
+                            risk {r.fraud_score || 0}/100
+                          </span>
+                        </div>
+                        {(r.fraud_flags || r.rejection_reason) && (
+                          <div style={{ color:'#fca5a5', fontSize:10, marginTop:3 }}>{r.fraud_flags || r.rejection_reason}</div>
+                        )}
+                        <select value={r.document_status || 'pending'} onChange={e => updateDocumentStatus(r.id, e.target.value)}
+                          style={{ marginTop:6, background:'rgba(255,255,255,.07)', border:'1px solid rgba(255,255,255,.12)', color:'#fff', padding:'5px 9px', borderRadius:5, fontSize:10, cursor:'pointer', fontFamily:'monospace' }}>
+                          {['pending','verified','reload_requested','rejected'].map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                      </div>
+                    </td>
                     <td style={TD}>
                       <span style={{ padding:'2px 9px', borderRadius:4, fontSize:9, fontWeight:700,
                         background: SBG[r.status]||'rgba(255,255,255,.08)', color: SC[r.status]||'rgba(255,255,255,.5)' }}>
@@ -305,5 +342,5 @@ export default function Admin() {
 }
 
 const TD: React.CSSProperties = { padding:'11px 14px', fontSize:12, color:'rgba(255,255,255,.8)', verticalAlign:'middle' };
-const SBG: Record<string,string> = { new:'rgba(201,149,42,.14)', contacted:'rgba(96,165,250,.14)', converted:'rgba(116,198,157,.14)', rejected:'rgba(248,113,113,.14)' };
-const SC:  Record<string,string> = { new:'#c9952a', contacted:'#60a5fa', converted:'#74c69d', rejected:'#f87171' };
+const SBG: Record<string,string> = { new:'rgba(201,149,42,.14)', contacted:'rgba(96,165,250,.14)', converted:'rgba(116,198,157,.14)', rejected:'rgba(248,113,113,.14)', pending:'rgba(201,149,42,.14)', verified:'rgba(116,198,157,.14)', reload_requested:'rgba(248,113,113,.14)' };
+const SC:  Record<string,string> = { new:'#c9952a', contacted:'#60a5fa', converted:'#74c69d', rejected:'#f87171', pending:'#c9952a', verified:'#74c69d', reload_requested:'#f87171' };

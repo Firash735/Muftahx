@@ -23,9 +23,9 @@ export async function GET(req: NextRequest) {
       supabaseAdmin.from('registrations').select('*', { count: 'exact', head: true }),
       supabaseAdmin.from('registrations').select('*', { count: 'exact', head: true }).eq('type', 'seller'),
       supabaseAdmin.from('registrations').select('*', { count: 'exact', head: true }).eq('type', 'buyer'),
-      supabaseAdmin.from('exporters').select('*', { count: 'exact', head: true }),
+      supabaseAdmin.from('registrations').select('*', { count: 'exact', head: true }).in('document_status', ['rejected', 'reload_requested']),
     ]);
-    return NextResponse.json({ total: a.count||0, sellers: b.count||0, buyers: c.count||0, exporters: d.count||0 });
+    return NextResponse.json({ total: a.count||0, sellers: b.count||0, buyers: c.count||0, review: d.count||0 });
   }
 
   if (resource === 'registrations') {

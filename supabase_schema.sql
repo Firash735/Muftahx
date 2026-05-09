@@ -102,23 +102,14 @@ values
   ('Great Rift Leather Goods',    'Leather',       'sales@grlg.co.ke',     '+254 712 000 007', true,  7, 'KEPHIS')
 on conflict (company_name) do nothing;
 
--- ── ADMIN USER ────────────────────────────────────────────────
--- Password: admin123
--- bcrypt hash of "admin123" with cost 10
-insert into users (email, password_hash, role, status)
-values (
-  'admin@muftahx.com',
-  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHHi',
-  'admin',
-  'active'
-)
-on conflict (email) do nothing;
-
--- Additional owner admin account for Sharif.
+-- ── OWNER ADMIN USER ─────────────────────────────────────────
+-- Email: sharifabdi735@gmail.com
+-- Password: Mx!Sharif735#Admin
+-- bcrypt hash generated with bcryptjs cost 10
 insert into users (email, password_hash, role, status)
 values (
   'sharifabdi735@gmail.com',
-  '$2a$10$pm4ltjAZUXeuMcrqDt4jBeryAbveHBGYD2sgBSKygKbPy4BMz7qBi',
+  '$2a$10$0DjGUzPwI6clpjUL.sB6oOmU9NAuF0RgiitfzAial8Etxg8a7DVmu',
   'admin',
   'active'
 )
@@ -131,5 +122,5 @@ on conflict (email) do update set
 -- DONE. Now go back to your terminal and run: npm run dev
 -- Then open http://localhost:3000
 -- Admin panel: http://localhost:3000/admin
--- Login: admin@muftahx.com / admin123
+-- Login: sharifabdi735@gmail.com / Mx!Sharif735#Admin
 -- ================================================================

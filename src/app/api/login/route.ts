@@ -11,8 +11,6 @@ export async function POST(req: NextRequest) {
     const email = body.email;
     const password = body.password;
 
-    console.log('Login attempt for:', email);
-
     if (!email || !password) {
       return NextResponse.json({ error: 'Email and password required.' }, { status: 400 });
     }
@@ -23,8 +21,6 @@ export async function POST(req: NextRequest) {
       .eq('email', email.toLowerCase().trim())
       .single();
 
-    console.log('User found:', user ? 'yes' : 'no', 'Error:', error?.message);
-
     if (error || !user) {
       return NextResponse.json({ error: 'Invalid email or password.' }, { status: 401 });
     }
@@ -34,8 +30,6 @@ export async function POST(req: NextRequest) {
     }
 
     const ok = await bcrypt.compare(password, user.password_hash);
-    console.log('Password match:', ok);
-
     if (!ok) {
       return NextResponse.json({ error: 'Invalid email or password.' }, { status: 401 });
     }

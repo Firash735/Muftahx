@@ -86,7 +86,7 @@ This creates:
 - `registrations` table — stores everyone who signs up from the website
 - `exporters` table — stores the exporter database (pre-filled with 7 sample records)
 - `users` table — stores admin accounts
-- Admin user: `admin@muftahx.com` / password: `admin123`
+- Admin user: `sharifabdi735@gmail.com` / password: `Mx!Sharif735#Admin`
 
 ---
 
@@ -148,8 +148,8 @@ You should see the full MuftahX website with:
 http://localhost:3000/admin
 ```
 Login with:
-- Email: `admin@muftahx.com`
-- Password: `admin123`
+- Email: `sharifabdi735@gmail.com`
+- Password: `Mx!Sharif735#Admin`
 
 You should see:
 - **Stats row**: Total registrations, Sellers, Buyers, Exporters counts
@@ -240,7 +240,7 @@ For GitHub-based deployment, use the repository:
 
 **Admin login says "Invalid email or password"**
 → Make sure you ran the SQL schema in Supabase (Step 5)
-→ Try: admin@muftahx.com / admin123
+→ Try: sharifabdi735@gmail.com / Mx!Sharif735#Admin
 
 **"Supabase not connected" warning in admin panel**
 → Your `.env.local` keys are wrong or missing. Check Step 4 again.

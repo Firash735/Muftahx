@@ -26,7 +26,7 @@ export default function Admin() {
   const [search,  setSearch]  = useState('');
   const [loading, setLoading] = useState(false);
   const [toast,   setToast]   = useState('');
-  const [email,   setEmail]   = useState('admin@muftahx.com');
+  const [email,   setEmail]   = useState('sharifabdi735@gmail.com');
   const [pass,    setPass]    = useState('');
   const [loginErr,setLErr]    = useState('');
 
@@ -35,11 +35,18 @@ export default function Admin() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const [s, r, e] = await Promise.all([
-        fetch('/api/admin?resource=stats').then(x => x.json()),
-        fetch('/api/admin?resource=registrations').then(x => x.json()),
-        fetch('/api/admin?resource=exporters').then(x => x.json()),
+      const responses = await Promise.all([
+        fetch('/api/admin?resource=stats'),
+        fetch('/api/admin?resource=registrations'),
+        fetch('/api/admin?resource=exporters'),
       ]);
+      if (responses.some(x => x.status === 401)) {
+        setPage('login');
+        setLErr('Your admin session expired. Sign in again to continue.');
+        setLoading(false);
+        return;
+      }
+      const [s, r, e] = await Promise.all(responses.map(x => x.json()));
       if (s.total !== undefined) setStats(s);
       if (r.data) setRegs(r.data);
       if (e.data) setExps(e.data);
@@ -69,6 +76,11 @@ export default function Admin() {
       body: JSON.stringify({ id, table: 'registrations', updates: { status } }),
     });
     const d = await r.json();
+    if (r.status === 401) {
+      setPage('login');
+      setLErr('Your admin session expired. Sign in again to continue.');
+      return;
+    }
     if (d.success) { setRegs(p => p.map(x => x.id === id ? { ...x, status } : x)); toast_('✓ Status updated to "' + status + '"'); }
   };
 
@@ -80,6 +92,11 @@ export default function Admin() {
       body: JSON.stringify({ id, table: 'registrations', updates }),
     });
     const d = await r.json();
+    if (r.status === 401) {
+      setPage('login');
+      setLErr('Your admin session expired. Sign in again to continue.');
+      return;
+    }
     if (d.success) {
       setRegs(p => p.map(x => x.id === id ? { ...x, ...updates } : x));
       toast_('✓ Document status updated to "' + document_status + '"');
@@ -126,7 +143,7 @@ export default function Admin() {
           Sign In →
         </button>
         <div style={{ fontSize:10, color:'rgba(255,255,255,.25)', marginTop:14, textAlign:'center', lineHeight:1.6 }}>
-          Default credentials:<br/>admin@muftahx.com / admin123
+          Admin access is protected. Use your MuftahX admin email and password.
         </div>
       </div>
     </div>

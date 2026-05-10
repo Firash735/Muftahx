@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import SupportClient from './SupportClient';
 
 export const metadata: Metadata = {
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function SupportPage() {
-  return <SupportClient />;
+  return (
+    <Suspense fallback={null}>
+      <SupportClient />
+    </Suspense>
+  );
 }

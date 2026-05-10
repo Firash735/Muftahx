@@ -186,6 +186,9 @@ Click on `users` — you should see the admin account.
 | `http://localhost:3000/products` | SEO product directory |
 | `http://localhost:3000/knowledge` | Export knowledge hub |
 | `http://localhost:3000/support` | AI support prototype for buyers, sellers, and admins |
+| `http://localhost:3000/buyer/dashboard` | Registered buyer dashboard after Google signup |
+| `http://localhost:3000/seller/dashboard` | Registered seller dashboard after Google signup |
+| `http://localhost:3000/signup/complete` | Google signup completion route |
 | `http://localhost:3000/api/register` | POST endpoint — registration form submits here |
 | `http://localhost:3000/api/auth/google?type=seller` | Starts Google signup through Supabase Auth |
 | `http://localhost:3000/api/login` | POST endpoint — admin login |

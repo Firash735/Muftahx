@@ -36,6 +36,8 @@ create table if not exists registrations (
   rejection_reason text,
   status        text        default 'new' check (status in ('new','contacted','converted','rejected')),
   notes         text,
+  auth_user_id  uuid,
+  signup_provider text default 'manual',
   created_at    timestamptz default now()
 );
 
@@ -45,6 +47,22 @@ alter table registrations add column if not exists document_status text default 
 alter table registrations add column if not exists fraud_score integer default 0;
 alter table registrations add column if not exists fraud_flags text;
 alter table registrations add column if not exists rejection_reason text;
+alter table registrations add column if not exists auth_user_id uuid;
+alter table registrations add column if not exists signup_provider text default 'manual';
+
+-- ── PLATFORM ACCOUNTS (Google signup identities) ─────────────
+create table if not exists platform_accounts (
+  id              uuid primary key default gen_random_uuid(),
+  auth_user_id    uuid unique,
+  email           text not null unique,
+  full_name       text,
+  role            text not null check (role in ('seller','buyer')),
+  signup_provider text not null default 'google',
+  status          text not null default 'active' check (status in ('active','pending_review','rejected')),
+  last_login_at   timestamptz default now(),
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
+);
 
 -- ── EXPORTERS (populated by data engine) ─────────────────────
 create table if not exists exporters (
@@ -73,6 +91,7 @@ create table if not exists exporters (
 alter table registrations enable row level security;
 alter table exporters     enable row level security;
 alter table users         enable row level security;
+alter table platform_accounts enable row level security;
 
 -- Replace public policies safely when this schema is re-run.
 drop policy if exists "public_insert_registrations" on registrations;
@@ -91,8 +110,11 @@ create index if not exists idx_reg_type    on registrations(type);
 create index if not exists idx_reg_status  on registrations(status);
 create index if not exists idx_reg_email   on registrations(email);
 create index if not exists idx_reg_doc_status on registrations(document_status);
+create index if not exists idx_reg_auth_user on registrations(auth_user_id);
 create index if not exists idx_exp_cat     on exporters(category);
 create index if not exists idx_exp_score   on exporters(data_score desc);
+create index if not exists idx_platform_role on platform_accounts(role);
+create index if not exists idx_platform_email on platform_accounts(email);
 
 -- ── SAMPLE EXPORTERS (for testing the admin panel) ────────────
 insert into exporters (company_name, category, email, phone, is_verified, data_score, source)

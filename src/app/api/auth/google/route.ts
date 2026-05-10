@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(fallback);
   }
 
-  const redirectTo = `${req.nextUrl.origin}/index.html?signup=${type}&google=1`;
+  const redirectTo = `${req.nextUrl.origin}/signup/complete?type=${type}`;
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',

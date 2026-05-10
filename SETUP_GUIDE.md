@@ -209,6 +209,9 @@ The Google signup button uses Supabase Auth. To make it live:
 After that, the signup buttons route through:
 `/api/auth/google?type=seller` or `/api/auth/google?type=buyer`.
 
+MuftahX uses Google signup as the main public signup path. This gives each visitor one email identity,
+reduces duplicate registrations, and lets the admin panel review real buyers and sellers with cleaner context.
+
 ---
 
 ## DEPLOY TO THE INTERNET

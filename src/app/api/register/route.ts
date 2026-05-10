@@ -50,6 +50,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid account type.' }, { status: 400 });
     }
 
+    const { data: existing } = await supabaseAdmin
+      .from('registrations')
+      .select('id, type, status')
+      .eq('email', cleanEmail)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (existing) {
+      return NextResponse.json({
+        error: 'This email already has a MuftahX registration. Continue with Google to use the same account.',
+        existing,
+      }, { status: 409 });
+    }
+
     const review = assessRegistration(body, cleanEmail);
 
     const { data, error } = await supabaseAdmin

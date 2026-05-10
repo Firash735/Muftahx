@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/`, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${baseUrl}/products`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/knowledge`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${baseUrl}/support`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     ...products.map(product => ({
       url: `${baseUrl}/products/${product.slug}`,
       lastModified: now,

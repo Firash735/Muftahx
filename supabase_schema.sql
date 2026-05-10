@@ -74,6 +74,10 @@ alter table registrations enable row level security;
 alter table exporters     enable row level security;
 alter table users         enable row level security;
 
+-- Replace public policies safely when this schema is re-run.
+drop policy if exists "public_insert_registrations" on registrations;
+drop policy if exists "public_read_exporters" on exporters;
+
 -- Anyone can INSERT a registration (this is the modal form)
 create policy "public_insert_registrations"
   on registrations for insert with check (true);

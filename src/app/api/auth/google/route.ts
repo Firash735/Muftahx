@@ -3,6 +3,15 @@ import { supabase } from '@/lib/supabase';
 
 export async function GET(req: NextRequest) {
   const type = req.nextUrl.searchParams.get('type') === 'buyer' ? 'buyer' : 'seller';
+  const enabled = process.env.GOOGLE_AUTH_ENABLED === 'true';
+
+  if (!enabled) {
+    const fallback = new URL('/support', req.nextUrl.origin);
+    fallback.searchParams.set('google', 'setup-required');
+    fallback.searchParams.set('type', type);
+    return NextResponse.redirect(fallback);
+  }
+
   const redirectTo = `${req.nextUrl.origin}/index.html?signup=${type}&google=1`;
 
   const { data, error } = await supabase.auth.signInWithOAuth({

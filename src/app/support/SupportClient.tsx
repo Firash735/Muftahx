@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { FormEvent, useMemo, useState } from 'react';
 
 type Role = 'seller' | 'buyer';
@@ -49,7 +50,10 @@ function answerQuestion(question: string): Message[] {
 }
 
 export default function SupportClient() {
-  const [role, setRole] = useState<Role>('seller');
+  const searchParams = useSearchParams();
+  const googleSetupRequired = searchParams.get('google') === 'setup-required';
+  const initialType = searchParams.get('type') === 'buyer' ? 'buyer' : 'seller';
+  const [role, setRole] = useState<Role>(initialType);
   const [question, setQuestion] = useState('');
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -91,6 +95,13 @@ export default function SupportClient() {
           This keeps the platform useful for visitors while protecting supplier data, document review,
           buyer matching, and negotiation support for registered users.
         </p>
+        {googleSetupRequired && (
+          <div style={styles.notice}>
+            Google signup is connected in the app, but the Google provider is not enabled in Supabase yet.
+            Enable Google in Supabase Auth, add the Google OAuth Client ID and Secret, then set
+            <strong> GOOGLE_AUTH_ENABLED=true </strong> in the app environment.
+          </div>
+        )}
       </section>
 
       <section style={styles.shell}>
@@ -179,6 +190,7 @@ const styles: Record<string, React.CSSProperties> = {
   kicker: { color: '#b8841f', textTransform: 'uppercase', letterSpacing: '.14em', fontSize: 12, fontWeight: 800, margin: 0 },
   h1: { fontFamily: 'Georgia, serif', fontSize: 'clamp(40px, 6vw, 74px)', lineHeight: 1.02, margin: '14px 0 18px', maxWidth: 890 },
   lede: { color: '#44443c', fontSize: 18, lineHeight: 1.75, maxWidth: 820 },
+  notice: { maxWidth: 820, marginTop: 20, background: '#fff8e8', border: '1px solid #e7c56c', color: '#4f3910', borderRadius: 8, padding: 16, lineHeight: 1.65, fontSize: 14 },
   shell: { maxWidth: 1120, margin: '0 auto', padding: '0 24px 56px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 16 },
   side: { background: '#fff', border: '1px solid #e6e1d3', borderRadius: 8, padding: 20, alignSelf: 'start' },
   sideLabel: { color: '#8b6b26', textTransform: 'uppercase', letterSpacing: '.12em', fontSize: 11, fontWeight: 900, margin: '0 0 12px' },

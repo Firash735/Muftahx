@@ -65,6 +65,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://YOUR_ACTUAL_PROJECT_ID.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...your_actual_anon_key
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGc...your_actual_service_role_key
 JWT_SECRET=any_long_random_string_you_choose_like_muftahx2025secret
+GOOGLE_AUTH_ENABLED=false
 ```
 
 Save the file.
@@ -203,6 +204,7 @@ The Google signup button uses Supabase Auth. To make it live:
 3. Add your Google OAuth Client ID and Client Secret.
 4. In Google Cloud Console, add your callback URL from Supabase Auth settings.
 5. Keep `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`.
+6. Change `GOOGLE_AUTH_ENABLED=false` to `GOOGLE_AUTH_ENABLED=true`.
 
 After that, the signup buttons route through:
 `/api/auth/google?type=seller` or `/api/auth/google?type=buyer`.

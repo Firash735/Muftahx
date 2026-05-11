@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/'],
+      disallow: ['/api/', '/admin', '/owner-735'],
     },
     sitemap: 'https://muftahx.com/sitemap.xml',
   };

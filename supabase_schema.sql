@@ -82,6 +82,24 @@ create table if not exists seller_products (
   updated_at         timestamptz default now()
 );
 
+-- ── BUYER SOURCING REQUESTS (registered buyer demand) ───────
+create table if not exists buyer_requests (
+  id                 uuid primary key default gen_random_uuid(),
+  buyer_email        text not null,
+  auth_user_id       uuid,
+  company_name       text,
+  country            text,
+  product_interest   text not null,
+  volume             text,
+  destination_market text,
+  timeline           text,
+  certification_need text,
+  notes              text,
+  status             text not null default 'new' check (status in ('new','matched','contacted','closed','rejected')),
+  created_at         timestamptz default now(),
+  updated_at         timestamptz default now()
+);
+
 -- ── EXPORTERS (populated by data engine) ─────────────────────
 create table if not exists exporters (
   id               uuid        primary key default gen_random_uuid(),
@@ -111,6 +129,7 @@ alter table exporters     enable row level security;
 alter table users         enable row level security;
 alter table platform_accounts enable row level security;
 alter table seller_products enable row level security;
+alter table buyer_requests enable row level security;
 
 -- Replace public policies safely when this schema is re-run.
 drop policy if exists "public_insert_registrations" on registrations;
@@ -136,6 +155,8 @@ create index if not exists idx_platform_role on platform_accounts(role);
 create index if not exists idx_platform_email on platform_accounts(email);
 create index if not exists idx_seller_products_email on seller_products(seller_email);
 create index if not exists idx_seller_products_status on seller_products(status);
+create index if not exists idx_buyer_requests_email on buyer_requests(buyer_email);
+create index if not exists idx_buyer_requests_status on buyer_requests(status);
 
 -- ── SAMPLE EXPORTERS (for testing the admin panel) ────────────
 insert into exporters (company_name, category, email, phone, is_verified, data_score, source)

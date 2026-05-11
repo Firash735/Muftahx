@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://github.com/Firash735/muftahx'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'MuftahX — Verified Kenyan Export Marketplace',
     template: '%s | MuftahX',

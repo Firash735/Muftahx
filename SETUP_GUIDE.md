@@ -63,6 +63,7 @@ Replace the placeholder values:
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_ACTUAL_PROJECT_ID.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...your_actual_anon_key
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGc...your_actual_service_role_key
 JWT_SECRET=any_long_random_string_you_choose_like_muftahx2025secret
 GOOGLE_AUTH_ENABLED=false
@@ -223,8 +224,10 @@ When you are ready to make it live, push the latest `main` branch to GitHub and 
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SITE_URL` — your live Vercel/domain URL, for example `https://muftahx.vercel.app`
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `JWT_SECRET`
+- `GOOGLE_AUTH_ENABLED`
 
 For a production server you control:
 

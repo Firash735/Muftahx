@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { FormEvent, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import PasswordSetup from '@/app/account/PasswordSetup';
 
 type UserState = { email: string | null; token: string | null; loading: boolean };
 type Profile = {
@@ -162,6 +163,10 @@ export default function SellerDashboard() {
         <div style={styles.statusCard}><span>Products</span><strong>{products.length}</strong></div>
       </section>
 
+      <section style={styles.passwordWrap}>
+        <PasswordSetup />
+      </section>
+
       <section style={styles.layout}>
         <form onSubmit={saveProfile} style={styles.panel}>
           <h2 style={styles.h2}>Profile readiness</h2>
@@ -241,6 +246,7 @@ const styles: Record<string, React.CSSProperties> = {
   textSmall: { color: '#45453e', fontSize: 14, lineHeight: 1.7 },
   primary: { display: 'inline-block', marginTop: 16, background: '#1b4332', color: '#fff', textDecoration: 'none', borderRadius: 6, padding: '13px 18px', fontWeight: 900 },
   statusRow: { maxWidth: 1100, margin: '0 auto', padding: '0 24px 16px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 },
+  passwordWrap: { padding: '0 24px' },
   statusCard: { background: '#fff', border: '1px solid #e6e1d3', borderRadius: 8, padding: 16, display: 'grid', gap: 6 },
   layout: { maxWidth: 1100, margin: '0 auto', padding: '0 24px 18px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: 16 },
   panel: { background: '#fff', border: '1px solid #e6e1d3', borderRadius: 8, padding: 22 },

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import PasswordSetup from '@/app/account/PasswordSetup';
 
 type UserState = { email: string | null; loading: boolean };
 
@@ -37,6 +38,9 @@ export default function BuyerDashboard() {
         <h1 style={styles.h1}>Find verified Kenyan suppliers with proof.</h1>
         <p style={styles.text}>Signed in as {user.email}. This dashboard is where buyer sourcing, supplier shortlists, and deeper AI support should live.</p>
       </section>
+      <section style={styles.passwordWrap}>
+        <PasswordSetup />
+      </section>
       <section style={styles.grid}>
         {[
           ['Supplier discovery', 'Browse product pages and request matched sellers only after verification signals are clear.'],
@@ -66,5 +70,6 @@ const styles: Record<string, React.CSSProperties> = {
   textSmall: { color: '#45453e', fontSize: 14, lineHeight: 1.7 },
   primary: { display: 'inline-block', marginTop: 16, background: '#1b4332', color: '#fff', textDecoration: 'none', borderRadius: 6, padding: '13px 18px', fontWeight: 900 },
   grid: { maxWidth: 1100, margin: '0 auto', padding: '0 24px 72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14 },
+  passwordWrap: { padding: '0 24px 16px' },
   tile: { background: '#fff', border: '1px solid #e6e1d3', borderRadius: 8, padding: 22 },
 };
